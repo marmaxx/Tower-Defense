@@ -1,3 +1,3 @@
-public class Humain{
+public abstract class Humain{
 
 }
