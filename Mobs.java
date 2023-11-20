@@ -28,7 +28,7 @@ abstract class Mobs {
 
     abstract void attaque(Humain m);
 
-    public void PerdPv(int i){
+    public void perdPv(int i){
         if (this.pv <= i ){
             this.pv = 0;
         } else {
