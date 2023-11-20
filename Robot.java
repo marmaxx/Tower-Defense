@@ -1,14 +1,12 @@
-public class Robot extends Mobs implements EstAttaque{
+public class Robot extends Mobs {
 
     Robot(){ super(50,5,6,"robot",1);}
 
+    @Override
     public void attaque(Humain m){
-        /*m.estAttaque(this.getDega());*/
+        /*m.perdPv(this.getDegats());*/
     }
 
-    public void estAttaque(int dega){
-        this.PerdPv(dega);
-    }
 
 
 }
