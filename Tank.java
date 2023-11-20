@@ -1,12 +1,10 @@
-public class Tank extends Mobs implements EstAttaque {
+public class Tank extends Mobs {
 
     Tank(){ super(100,1,9,"Tank",3);}
     
-    public void attaque(Humain m){
-        /* m.estAttaque(this.getDega());*/
-    }
 
-    public void estAttaque(int dega){
-        this.PerdPv(dega);
+    @Override
+    public void attaque(Humain m){
+        /* m.perdPv(this.getDegats());*/
     }
 }

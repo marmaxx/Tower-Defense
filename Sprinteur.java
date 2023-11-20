@@ -1,12 +1,11 @@
-public class Sprinteur extends Mobs implements EstAttaque{
+public class Sprinteur extends Mobs {
 
     Sprinteur(){ super(30,10,0,"sprinteur",0);}
     
+
+    @Override
     public void attaque(Humain m){
-        /* m.estAttaque(this.getDega());*/
+        /*m.perdPv(this.getDegats());*/
     }
 
-    public void estAttaque(int dega){
-        this.PerdPv(dega);
-    }
 }
