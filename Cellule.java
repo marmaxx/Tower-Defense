@@ -1,7 +1,7 @@
-public class Cellule{
-    //public enum Contenu { SABLE, EAU, HERBE, ARBRE, BASE_IA, BASE_HUMAIN}
-    private String contenu;
-    public String getContenu(){ return contenu;}
+public record Cellule (Contenu c){
+    public enum Contenu { SABLE, EAU, TERRE, ARBRE, BASE_IA, BASE_HUMAIN};
 
-    public Cellule (String c){ this.contenu=c;}
+    public Contenu getContenu(){ return this.c;}
+
+    public static Cellule sol (Contenu c){ return new Cellule(c);}
 }

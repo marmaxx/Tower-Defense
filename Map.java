@@ -1,51 +1,4 @@
 public class Map {
-    /*public void contourMap(Cellule[][] cell){
-        for (int i = 0; i < cell.length; i++){
-            for (int j = 0; j < cell[0].length; j++){
-                if (i==0){ cell[i][j] = new Cellule("ARBRE");}
-                if (i < cell.length-1 && j == 0 || i < cell.length-1 && j == cell[0].length-1){ cell[i][j] = new Cellule("ARBRE");}
-                if (i == cell.length-1 && j < 3){ cell[i][j] = new Cellule("BASE_IA");}
-                if (i == cell.length-1 && j > cell[0].length-4){ cell[i][j] = new Cellule("BASE_HUMAIN");}
-                if (i == cell.length-1 && j >= 3 && j<= cell[0].length-4){ cell[i][j] = new Cellule("ARBRE");}
-            }
-        }
-    }
-
-    public void map1 (){
-        Cellule [][] cell = new Cellule[8][9];
-        contourMap(cell);
-        for (int i = 1; i < cell[1].length-1; i++){
-            cell[1][i] = new Cellule("SABLE");
-        }
-        cell[1][4] = new Cellule("TERRE");
-        for (int i = 1; i < cell.length-1; i++){
-            cell[i][1] = new Cellule("SABLE");
-        }
-        for (int i = 1; i < cell.length-1; i++){
-            cell[i][3] = new Cellule("SABLE");
-        }
-        for (int i = 1; i < cell.length-1; i++){
-            cell[i][7] = new Cellule("SABLE");
-        }
-        for (int i = 1; i < cell.length-1; i++){
-            cell[i][5] = new Cellule("SABLE");
-        }
-        for (int i = 2; i < cell.length-1; i++){
-            if (i%2==0){ cell[i][2] = new Cellule("TERRE");}
-            else{ cell[i][2] = new Cellule("EAU");}
-        }
-        for (int i = 2; i < cell.length-1; i++){
-            if (i%2==0){ cell[i][6] = new Cellule("TERRE");}
-            else{ cell[i][6] = new Cellule("EAU");}
-        }
-        for (int i = 1; i < cell.length-2; i++){
-            if (i%2!=0){ cell[i][4] = new Cellule("TERRE");}
-            else{ cell[i][4] = new Cellule("EAU");}
-        }
-        cell[6][4] = new Cellule("SABLE");
-        afficher(cell);
-    }*/
-
     public void contourMap(Cellule[][] cell){
         for (int i = 0; i < cell.length; i++){
             for (int j = 0; j < cell[0].length; j++){
@@ -146,7 +99,6 @@ public class Map {
         Cellule [][] cell = new Cellule[7][9];
         Map m = new Map();
         m.contourMap(cell);
-        //m.afficher(cell);
         m.map1();
     }
 }
