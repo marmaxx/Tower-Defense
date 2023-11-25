@@ -4,10 +4,14 @@ public record Cellule (Contenu c , boolean dispo){
     private static boolean mobs; 
     private static boolean disponible;
 
-    public Contenu getContenu(){ return this.c;}
     public boolean getDispo(){ return disponible;}
+    public Contenu getContenu(){ return this.c;}
+    public void setDisponible(boolean dispo){ disponible = dispo;}
+    public void setMobs(boolean mob){ mobs = mob;}
 
-    public void setDisponible(boolean dispo){ this.disponible = dispo;}
-    public void setMobs(boolean mobs){ this.mobs = mobs;}
+
+    
+    
+    public static Cellule sol (Contenu c){ return new Cellule(c);}
 
 }

@@ -67,12 +67,12 @@ public class Map {
         Cellule [][] cell = new Cellule[8][9]; 
         contourMap(cell);
         for (int i = 1; i < cell[1].length-2; i++){ cell[1][i] = Cellule.sol(Cellule.Contenu.SABLE);}
-        for (int i = 1; i < cell[1].length-2; i++){cell[i][1] = new Cellule("SABLE"); cell[i][cell[1].length-2] = new Cellule("SABLE");}
-        for (int i = 2; i < cell[1].length-3; i++){ cell[2][i] = new Cellule("EAU"); cell[cell[1].length-3][i] = new Cellule("EAU");}
-        for (int i = 2; i < cell[1].length-2; i++){cell[i][2] = new Cellule("EAU"); cell[i][cell[1].length-3] = new Cellule("EAU");}
+        for (int i = 1; i < cell[1].length-2; i++){cell[i][1] = Cellule.sol(Cellule.Contenu.SABLE); cell[i][cell[1].length-2] = Cellule.sol(Cellule.Contenu.SABLE);}
+        for (int i = 2; i < cell[1].length-3; i++){ cell[2][i] = Cellule.sol(Cellule.Contenu.EAU); cell[cell[1].length-3][i] = new Cellule(Cellule.Contenu.EAU);}
+        for (int i = 2; i < cell[1].length-2; i++){cell[i][2] = Cellule.sol(Cellule.Contenu.SABLE); cell[i][cell[1].length-3] = Cellule.sol(Cellule.Contenu.EAU);}
         for (int i =3; i< cell[1].length-2; i++){
             for (int j=3; j<cell[1].length-3; j++){
-                cell[i][j] = new Cellule("TERRE");
+                cell[i][j] = Cellule.sol(Cellule.Contenu.TERRE);
             }
         }
         afficher(cell);
@@ -136,8 +136,6 @@ public class Map {
         Cellule [][] cell = new Cellule[7][9];
         Map m = new Map(cell);
         m.contourMap(cell);
-        //m.afficher(cell);
-        //m.map1();
         System.out.println("map 2");
         m.map2();
         System.out.println();
