@@ -66,7 +66,7 @@ public class Map {
     public void map2(){
         Cellule [][] cell = new Cellule[8][9]; 
         contourMap(cell);
-        for (int i = 1; i < cell[1].length-2; i++){ cell[1][i] = new Cellule("SABLE");}
+        for (int i = 1; i < cell[1].length-2; i++){ cell[1][i] = Cellule.sol(Cellule.Contenu.SABLE);}
         for (int i = 1; i < cell[1].length-2; i++){cell[i][1] = new Cellule("SABLE"); cell[i][cell[1].length-2] = new Cellule("SABLE");}
         for (int i = 2; i < cell[1].length-3; i++){ cell[2][i] = new Cellule("EAU"); cell[cell[1].length-3][i] = new Cellule("EAU");}
         for (int i = 2; i < cell[1].length-2; i++){cell[i][2] = new Cellule("EAU"); cell[i][cell[1].length-3] = new Cellule("EAU");}
