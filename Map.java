@@ -1,4 +1,10 @@
+import java.util.ArrayList;
+
 public class Map {
+    private Cellule [][] map;
+
+    Map(Cellule[][] map){this.map=map;}
+
     public void contourMap(Cellule[][] cell){
         for (int i = 0; i < cell.length; i++){
             for (int j = 0; j < cell[0].length; j++){
@@ -9,6 +15,16 @@ public class Map {
                 if (i == cell.length-1 && j >= 3 && j<= cell[0].length-4){ cell[i][j] =  Cellule.sol(Cellule.Contenu.ARBRE);}
             }
         }
+    }
+
+    public static Cellule[][] mapTest (){
+        Cellule [][] cell = new Cellule[3][3];
+        for (int i = 0; i < cell.length; i++){
+            for (int j = 0; j < cell[0].length; j++){
+                cell[i][j] = Cellule.sol(Cellule.Contenu.SABLE);
+            }
+        }
+        return cell;
     }
 
     public void map1 (){
@@ -82,7 +98,7 @@ public class Map {
                     switch (contenu) {
                         case ARBRE: printColoredSymbole('x',"vert"); break;
                         case SABLE: printColoredSymbole(' ', "jaune"); break;
-                        case TERRE: printColoredSymbole('_',"blanc");; break;
+                        case TERRE: printColoredSymbole('?',"blanc");; break;
                         case EAU: printColoredSymbole('~',"bleu");; break;
                         case BASE_IA: printColoredSymbole('|', "rouge"); break;
                         case BASE_HUMAIN: printColoredSymbole('|', "gris");; break;
@@ -95,9 +111,21 @@ public class Map {
         }
     }
 
+    public char direction (int x, int y, Cellule[][] map){
+        if (map[x-1][y] != null && map[x-1][y].getContenu() == Cellule.Contenu.SABLE){ return 'g';}
+        if (map[x][y-1] != null && map[x][y-1].getContenu() == Cellule.Contenu.SABLE){ return 'h';}
+        if (map[x+1][y] != null && map[x+1][y].getContenu() == Cellule.Contenu.SABLE){ return 'd';}
+        return ' ';
+    }
+
+    public void bougerVers(Mobs m, double x, double y, double vitesse) {
+        m.setX(m.getX()+vitesse*(x-m.getX()));
+        m.setY(m.getY()+vitesse*(y-m.getY()));
+    }
+
     public static void main (String [] args){
         Cellule [][] cell = new Cellule[7][9];
-        Map m = new Map();
+        Map m = new Map(cell);
         m.contourMap(cell);
         m.map1();
     }

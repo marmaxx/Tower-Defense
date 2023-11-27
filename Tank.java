@@ -1,6 +1,6 @@
 public class Tank extends Mobs {
 
-    Tank(){ super(100,1,9,"Tank",3);}
+    Tank(){ super(0,0,100,1,9,"Tank",3);}
     
 
     @Override
