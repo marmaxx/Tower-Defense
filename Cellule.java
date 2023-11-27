@@ -12,6 +12,6 @@ public record Cellule (Contenu c , boolean dispo){
 
     
     
-    public static Cellule sol (Contenu c){ return new Cellule(c);}
+    public static Cellule sol (Contenu c){ return new Cellule(c,false);}
 
 }
