@@ -68,7 +68,7 @@ public class Map {
         contourMap(cell);
         for (int i = 1; i < cell[1].length-2; i++){ cell[1][i] = Cellule.sol(Cellule.Contenu.SABLE);}
         for (int i = 1; i < cell[1].length-2; i++){cell[i][1] = Cellule.sol(Cellule.Contenu.SABLE); cell[i][cell[1].length-2] = Cellule.sol(Cellule.Contenu.SABLE);}
-        for (int i = 2; i < cell[1].length-3; i++){ cell[2][i] = Cellule.sol(Cellule.Contenu.EAU); cell[cell[1].length-3][i] = new Cellule(Cellule.Contenu.EAU);}
+        for (int i = 2; i < cell[1].length-3; i++){ cell[2][i] = Cellule.sol(Cellule.Contenu.EAU); cell[cell[1].length-3][i] = Cellule.sol(Cellule.Contenu.EAU);}
         for (int i = 2; i < cell[1].length-2; i++){cell[i][2] = Cellule.sol(Cellule.Contenu.SABLE); cell[i][cell[1].length-3] = Cellule.sol(Cellule.Contenu.EAU);}
         for (int i =3; i< cell[1].length-2; i++){
             for (int j=3; j<cell[1].length-3; j++){
