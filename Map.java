@@ -1,5 +1,3 @@
-import java.util.ArrayList;
-
 public class Map {
     private Cellule [][] map;
 
@@ -83,7 +81,6 @@ public class Map {
         String ANSI_RED = "\u001B[31m";
         String ANSI_GREEN = "\u001B[32m";
         String ANSI_BLUE = "\u001B[34m";
-        String ANSI_YELLOW = "\u001B[33m";
         String ANSI_GREY = "\u001B[90m";
         String ANSI_WHITE = "\u001B[97m";
 
