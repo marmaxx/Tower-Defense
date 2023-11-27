@@ -90,7 +90,7 @@ public class Map {
         switch (c) {
             case ARBRE:  System.out.print(ANSI_GREEN + " x " + ANSI_RESET); break;
             case SABLE:  System.out.print("   "); break;
-            case TERRE:  System.out.print(ANSI_WHITE + " ◊ " + ANSI_RESET);; break;
+            case TERRE:  System.out.print(ANSI_WHITE + " ? " + ANSI_RESET);; break;
             case EAU :  System.out.print(ANSI_BLUE + " ≈ " + ANSI_RESET);; break;
             case BASE_IA:  System.out.print(ANSI_RED + " - " + ANSI_RESET);; break;    
             case BASE_HUMAIN:  System.out.print(ANSI_GREY + " - " + ANSI_RESET);; break;
