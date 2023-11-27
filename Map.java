@@ -64,10 +64,21 @@ public class Map {
 
 
     public void map2(){
-        Cellule [][] cell = new Cellule[8][9];
+        Cellule [][] cell = new Cellule[8][9]; 
+        contourMap(cell);
+        for (int i = 1; i < cell[1].length-2; i++){ cell[1][i] = new Cellule("SABLE");}
+        for (int i = 1; i < cell[1].length-2; i++){cell[i][1] = new Cellule("SABLE"); cell[i][cell[1].length-2] = new Cellule("SABLE");}
+        for (int i = 2; i < cell[1].length-3; i++){ cell[2][i] = new Cellule("EAU"); cell[cell[1].length-3][i] = new Cellule("EAU");}
+        for (int i = 2; i < cell[1].length-2; i++){cell[i][2] = new Cellule("EAU"); cell[i][cell[1].length-3] = new Cellule("EAU");}
+        for (int i =3; i< cell[1].length-2; i++){
+            for (int j=3; j<cell[1].length-3; j++){
+                cell[i][j] = new Cellule("TERRE");
+            }
+        }
+        afficher(cell);
     }
 
-    public static void printColoredSymbole(char symbole, String s) {
+    public static void printColored(Cellule.Contenu c) {
         String ANSI_RESET = "\u001B[0m";
         String ANSI_RED = "\u001B[31m";
         String ANSI_GREEN = "\u001B[32m";
@@ -76,17 +87,15 @@ public class Map {
         String ANSI_GREY = "\u001B[90m";
         String ANSI_WHITE = "\u001B[97m";
 
-        String couleur = "";
-        switch (s) {
-            case "rouge": couleur = ANSI_RED; break;
-            case "vert": couleur = ANSI_GREEN; break;
-            case "bleu": couleur = ANSI_BLUE; break;
-            case "jaune": couleur = ANSI_YELLOW; break;
-            case "gris": couleur = ANSI_GREY; break;
-            case "blanc": couleur = ANSI_WHITE; break;
-            default: couleur = ANSI_RESET;
+        switch (c) {
+            case ARBRE:  System.out.print(ANSI_GREEN + " x " + ANSI_RESET); break;
+            case SABLE:  System.out.print("   "); break;
+            case TERRE:  System.out.print(ANSI_WHITE + " ◊ " + ANSI_RESET);; break;
+            case EAU :  System.out.print(ANSI_BLUE + " ≈ " + ANSI_RESET);; break;
+            case BASE_IA:  System.out.print(ANSI_RED + " - " + ANSI_RESET);; break;    
+            case BASE_HUMAIN:  System.out.print(ANSI_GREY + " - " + ANSI_RESET);; break;
+            default:break; 
         }
-        System.out.print(couleur + symbole+" " + ANSI_RESET);
     }
     
 
@@ -96,12 +105,12 @@ public class Map {
                 if (c[i][j] != null){
                     Cellule.Contenu contenu =  c[i][j].getContenu();
                     switch (contenu) {
-                        case ARBRE: printColoredSymbole('x',"vert"); break;
-                        case SABLE: printColoredSymbole(' ', "jaune"); break;
-                        case TERRE: printColoredSymbole('?',"blanc");; break;
-                        case EAU: printColoredSymbole('~',"bleu");; break;
-                        case BASE_IA: printColoredSymbole('|', "rouge"); break;
-                        case BASE_HUMAIN: printColoredSymbole('|', "gris");; break;
+                        case ARBRE: printColored(Cellule.Contenu.ARBRE); break;
+                        case SABLE: printColored(Cellule.Contenu.SABLE); break;
+                        case TERRE: printColored(Cellule.Contenu.TERRE);; break;
+                        case EAU: printColored(Cellule.Contenu.EAU);; break;
+                        case BASE_IA: printColored(Cellule.Contenu.BASE_IA); break;
+                        case BASE_HUMAIN: printColored(Cellule.Contenu.BASE_HUMAIN);; break;
                         default: break;
                     }
                 }
@@ -127,6 +136,13 @@ public class Map {
         Cellule [][] cell = new Cellule[7][9];
         Map m = new Map(cell);
         m.contourMap(cell);
+        //m.afficher(cell);
+        //m.map1();
+        System.out.println("map 2");
+        m.map2();
+        System.out.println();
+        System.out.println("map1 ");
         m.map1();
+
     }
 }

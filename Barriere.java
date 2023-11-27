@@ -1,7 +1,7 @@
 public class Barriere extends Humain{
 
-    Barriere(int pv, int vitesse, int degats, String type, int vitesseAttaque) {
-        super(pv, vitesse, degats, type, vitesseAttaque);
+    Barriere(int pv) {
+        super(pv, 0, 0, "Barrière",0);
     }
 
     @Override
