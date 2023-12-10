@@ -47,14 +47,6 @@ abstract class Mobs {
             default: break;
         }
     }
-     
-    public static void main (String [] args){
-        Cellule[][] map = Map.mapTest();
-        Map m = new Map(map);
-        Mobs rob = new Robot();
-        rob.mouvement('d', m);
-        m.afficher(Map.mapTest());
-    }
     
 
 
