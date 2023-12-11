@@ -3,6 +3,8 @@ import java.util.ArrayList;
 public class Map {
     private Cellule [][] map;
 
+    Map(){}
+
     public int getHauteur(){
         return map.length;
     }
@@ -27,7 +29,7 @@ public class Map {
         }
     }
 
-    public Cellule[][] map1 (){
+    public void map1 (){
         Cellule [][] cell = new Cellule[8][9];
         contourMap(cell);
         for (int i = 1; i < cell[1].length-1; i++){cell[1][i] =  new Cellule(Cellule.Contenu.SABLE,false);}
@@ -49,11 +51,11 @@ public class Map {
             else{ cell[i][4] =  new Cellule(Cellule.Contenu.EAU,false);}
         }
         cell[6][4] = new Cellule(Cellule.Contenu.SABLE,false);
-        return cell;
+        map = cell;
     }
 
 
-    public Cellule[][] map2(){
+    public void map2(){
         Cellule [][] cell = new Cellule[8][9]; 
         contourMap(cell);
         for (int i = 1; i < cell[1].length-2; i++){ cell[1][i] =  new Cellule(Cellule.Contenu.SABLE,false);}
@@ -65,7 +67,7 @@ public class Map {
                 cell[i][j] = new Cellule(Cellule.Contenu.TERRE, true);
             }
         }
-        return cell;
+        map = cell;
     }
 
     public static void printColored(Cellule.Contenu c) {
