@@ -1,6 +1,6 @@
 public class Tourelle extends Humain{
     Tourelle(int pv, int degats, int vitesse, int vitesseAttaque){
-        super(pv, vitesse, degats, "tourelle", vitesseAttaque);
+        super(pv, vitesse, degats, "tourelle", vitesseAttaque,10);
     }
 
     @Override

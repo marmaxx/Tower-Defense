@@ -1,6 +1,7 @@
 public class Test {
 
     public static void main(String [] args){
+
         Cellule [][] cell = new Cellule[8][9];
         Map m = new Map();
         m.contourMap(cell);

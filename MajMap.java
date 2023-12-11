@@ -1,8 +1,11 @@
+import java.util.LinkedList;
+
 public class MajMap {
     private Map mapBase;
     private final int hauteur;
     private final int largeur;
-    private String name;
+    private final String name;
+    private LinkedList<Cellule> towerList;
     
 
 
@@ -11,6 +14,7 @@ public class MajMap {
         this.hauteur = Map.getHauteur();
         this.largeur = Map.getLargeur();
         this.name = name;
+        this.towerList = new LinkedList<>();
     }
 
     public Map getMapBase(){
@@ -28,9 +32,22 @@ public class MajMap {
         finally {
             if (mapBase.getMap()[x][y].getDispo()){
             mapBase.getMap()[x][y].setDisponible(false);
-            mapBase.getMap()[x][y].setHumain(true);
+            mapBase.getMap()[x][y].setHumain(tower);
+            towerList.add(mapBase.getMap()[x][y]);
             } else { System.out.println("Case non disponible");}
         }
-    
-}
+    }
+
+
+    public void update(){
+
+        LinkedList<Cellule> delete = new LinkedList<>();
+        for(Cellule c : towerList){
+            if(c.getHumain().estMort()){
+                delete.add(c);
+                c.setHumain(null);
+            }
+        }
+        towerList.removeAll(delete);
+    }
 }

@@ -1,5 +1,5 @@
 package Geometrie;
-public record Coordonne(int x, int y) {
+public record Position(int x, int y) {
 
     public int getX(){ return x;}
 

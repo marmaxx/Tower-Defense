@@ -1,7 +1,7 @@
 public class Barriere extends Humain{
 
     Barriere(int pv) {
-        super(pv, 0, 0, "Barrière",0);
+        super(pv, 0, 0, "Barrière",0,10);
     }
     
     @Override

@@ -1,23 +1,26 @@
-import Geometrie.Coordonne;
+import Geometrie.Position;
 
 public class Cellule {
     public enum Contenu { SABLE, EAU, TERRE, ARBRE, BASE_IA, BASE_HUMAIN};
 
-    private static boolean mobs; 
+    private  Mobs  mobs = null; 
     private boolean disponible;
-    private static boolean humain;
+    private  Humain humain = null;
     private Contenu contenu;
-    private Coordonne coordonne;
+    private Position coordonne;
 
     public boolean getDispo(){ return disponible;}
     public Contenu getContenu(){ return this.contenu;}
     public void setDisponible(boolean dispo){ disponible = dispo;}
-    public void setMobs(boolean mob){ mobs = mob;}
-    public void setHumain(boolean humains){ humain = humains;}
+    public void setMobs(Mobs mob){ mobs = mob;}
+    public Mobs getMobs(){ return this.mobs;}
+    public void setHumain(Humain humains){ humain = humains;}
+    public Humain getHumain(){ return this.humain;}
+    
 
     Cellule (Contenu c, int x, int y, boolean dispo){
         this.contenu = c; 
-        this.coordonne = new Coordonne(x, y);
+        this.coordonne = new Position(x, y);
         this.disponible = dispo;
     } 
 }
