@@ -1,4 +1,3 @@
-import Geometrie.Position;
 
 public class Cellule {
     public enum Contenu { SABLE, EAU, TERRE, ARBRE, BASE_IA, BASE_HUMAIN, NOMBRE, MOB};
@@ -7,7 +6,6 @@ public class Cellule {
     private boolean disponible;
     private  Humain humain = null;
     private Contenu contenu;
-    private Position coordonne;
 
     public boolean getDispo(){ return disponible;}
     public Contenu getContenu(){ return this.contenu;}
