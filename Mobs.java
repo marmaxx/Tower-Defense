@@ -88,16 +88,4 @@ abstract class Mobs {
     public boolean estDansCase(int i, int j) {
         return ((getPos().getX() == (j+i)/2 && getPos().getY() < i+1) || (getPos().getX() < j+1 && getPos().getY() == (i+j)/2));
     }
-
-     
-    // public static void main (String [] args){
-    //     Cellule[][] map = Map.mapTest();
-    //     Map m = new Map(map);
-    //     Mobs rob = new Robot();
-    //     rob.mouvement('d', m);
-    //     m.afficher(Map.mapTest());
-    // }
-    
-
-
 }

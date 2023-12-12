@@ -18,9 +18,8 @@ public class Cellule {
     public Humain getHumain(){ return this.humain;}
     
 
-    Cellule (Contenu c, int x, int y, boolean dispo){
+    Cellule (Contenu c, boolean dispo){
         this.contenu = c; 
-        this.coordonne = new Position(x, y);
         this.disponible = dispo;
     } 
 }

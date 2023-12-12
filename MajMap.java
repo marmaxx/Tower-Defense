@@ -11,8 +11,8 @@ public class MajMap {
 
     MajMap (Map mapBase, String name ){
         this.mapBase = mapBase; 
-        this.hauteur = Map.getHauteur();
-        this.largeur = Map.getLargeur();
+        this.hauteur = mapBase.getHauteur();
+        this.largeur = mapBase.getLargeur();
         this.name = name;
         this.towerList = new LinkedList<>();
     }

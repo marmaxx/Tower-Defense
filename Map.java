@@ -2,16 +2,12 @@ import java.util.ArrayList;
 
 public class Map {
     private Cellule [][] map;
-    public Cellule[][] getMap(){ return this.map;}
 
-    Map(){}
-
-
-    public static int getHauteur(){
+    public int getHauteur(){
         return map.length;
     }
     
-    public static int getLargeur(){
+    public int getLargeur(){
         return map[1].length;
     }
 
@@ -19,52 +15,40 @@ public class Map {
         return map;
     }
 
-
-
     public void contourMap(Cellule[][] cell){
         for (int i = 0; i < cell.length; i++){
             for (int j = 0; j < cell[0].length; j++){
-                if (i==0){ cell[i][j] = new Cellule(Cellule.Contenu.ARBRE,i,j,false);}
-                if (i < cell.length-1 && j == 0 || i < cell.length-1 && j == cell[0].length-1){ cell[i][j] =  new Cellule(Cellule.Contenu.ARBRE,i,j,false);}
-                if (i == cell.length-1 && j < 3){ cell[i][j] =  new Cellule(Cellule.Contenu.BASE_IA,i,j,false);}
-                if (i == cell.length-1 && j > cell[0].length-4){ cell[i][j] =  new Cellule(Cellule.Contenu.BASE_HUMAIN,i,j,false);}
-                if (i == cell.length-1 && j >= 3 && j<= cell[0].length-4){ cell[i][j] =  new Cellule(Cellule.Contenu.ARBRE,i,j,false);}
+                if (i==0){ cell[i][j] = new Cellule(Cellule.Contenu.ARBRE,false);}
+                if (i < cell.length-1 && j == 0 || i < cell.length-1 && j == cell[0].length-1){ cell[i][j] =  new Cellule(Cellule.Contenu.ARBRE,false);}
+                if (i == cell.length-1 && j < 3){ cell[i][j] =  new Cellule(Cellule.Contenu.BASE_IA,false);}
+                if (i == cell.length-1 && j > cell[0].length-4){ cell[i][j] =  new Cellule(Cellule.Contenu.BASE_HUMAIN,false);}
+                if (i == cell.length-1 && j >= 3 && j<= cell[0].length-4){ cell[i][j] =  new Cellule(Cellule.Contenu.ARBRE,false);}
             }
         }
     }
 
-    /*public static Cellule[][] mapTest (){
-        Cellule [][] cell = new Cellule[3][3];
-        for (int i = 0; i < cell.length; i++){
-            for (int j = 0; j < cell[0].length; j++){
-                cell[i][j] = new Cellule(Cellule.Contenu.SABLE,i,j,false);
-            }
-        }
-        return cell;
-    }*/
-
     public Cellule[][] map1 (){
         Cellule [][] cell = new Cellule[8][9];
         contourMap(cell);
-        for (int i = 1; i < cell[1].length-1; i++){cell[1][i] =  new Cellule(Cellule.Contenu.SABLE,1,i,false);}
-        cell[1][4] =  new Cellule(Cellule.Contenu.TERRE, 1, 4, true);
-        for (int i = 1; i < cell.length-1; i++){cell[i][1] =  new Cellule(Cellule.Contenu.SABLE,i,4,false);}
-        for (int i = 1; i < cell.length-1; i++){cell[i][3] =  new Cellule(Cellule.Contenu.SABLE,i,3,false);}
-        for (int i = 1; i < cell.length-1; i++){cell[i][7] = new Cellule(Cellule.Contenu.SABLE,i,7,false);}
-        for (int i = 1; i < cell.length-1; i++){cell[i][5] =  new Cellule(Cellule.Contenu.SABLE,i,5,false);}
+        for (int i = 1; i < cell[1].length-1; i++){cell[1][i] =  new Cellule(Cellule.Contenu.SABLE,false);}
+        cell[1][4] =  new Cellule(Cellule.Contenu.TERRE, true);
+        for (int i = 1; i < cell.length-1; i++){cell[i][1] =  new Cellule(Cellule.Contenu.SABLE,false);}
+        for (int i = 1; i < cell.length-1; i++){cell[i][3] =  new Cellule(Cellule.Contenu.SABLE,false);}
+        for (int i = 1; i < cell.length-1; i++){cell[i][7] = new Cellule(Cellule.Contenu.SABLE,false);}
+        for (int i = 1; i < cell.length-1; i++){cell[i][5] =  new Cellule(Cellule.Contenu.SABLE,false);}
         for (int i = 2; i < cell.length-1; i++){
-            if (i%2==0){ cell[i][2] =  new Cellule(Cellule.Contenu.TERRE, i, 2, true);}
-            else{ cell[i][2] =  new Cellule(Cellule.Contenu.EAU,i,2,false);}
+            if (i%2==0){ cell[i][2] =  new Cellule(Cellule.Contenu.TERRE, true);}
+            else{ cell[i][2] =  new Cellule(Cellule.Contenu.EAU,false);}
         }
         for (int i = 2; i < cell.length-1; i++){
-            if (i%2==0){ cell[i][6] =  new Cellule(Cellule.Contenu.TERRE, i, 6, true);}
-            else{ cell[i][6] =  new Cellule(Cellule.Contenu.EAU,i,6,false);}
+            if (i%2==0){ cell[i][6] =  new Cellule(Cellule.Contenu.TERRE, true);}
+            else{ cell[i][6] =  new Cellule(Cellule.Contenu.EAU,false);}
         }
         for (int i = 1; i < cell.length-2; i++){
-            if (i%2!=0){ cell[i][4] =  new Cellule(Cellule.Contenu.TERRE, i, 4, true);}
-            else{ cell[i][4] =  new Cellule(Cellule.Contenu.EAU,i,4,false);}
+            if (i%2!=0){ cell[i][4] =  new Cellule(Cellule.Contenu.TERRE, true);}
+            else{ cell[i][4] =  new Cellule(Cellule.Contenu.EAU,false);}
         }
-        cell[6][4] = Cellule.sol(Cellule.Contenu.SABLE);
+        cell[6][4] = new Cellule(Cellule.Contenu.SABLE,false);
         return cell;
     }
 
@@ -72,13 +56,13 @@ public class Map {
     public Cellule[][] map2(){
         Cellule [][] cell = new Cellule[8][9]; 
         contourMap(cell);
-        for (int i = 1; i < cell[1].length-2; i++){ cell[1][i] =  new Cellule(Cellule.Contenu.SABLE,1,i,false);}
-        for (int i = 1; i < cell[1].length-2; i++){cell[i][1] = new Cellule(Cellule.Contenu.SABLE,i,1,false); cell[i][cell[1].length-2] = new Cellule(Cellule.Contenu.SABLE,i,cell[1].length-2,false);}
-        for (int i = 2; i < cell[1].length-3; i++){ cell[2][i] = new Cellule(Cellule.Contenu.EAU,2,i,false); cell[cell[1].length-3][i] = new Cellule(Cellule.Contenu.EAU,cell[1].length-3,i,false);}
-        for (int i = 2; i < cell[1].length-2; i++){cell[i][2] = new Cellule(Cellule.Contenu.EAU,i,2,false); cell[i][cell[1].length-3] = new Cellule(Cellule.Contenu.EAU,i,cell[1].length-3,false);}
+        for (int i = 1; i < cell[1].length-2; i++){ cell[1][i] =  new Cellule(Cellule.Contenu.SABLE,false);}
+        for (int i = 1; i < cell[1].length-2; i++){cell[i][1] = new Cellule(Cellule.Contenu.SABLE,false); cell[i][cell[1].length-2] = new Cellule(Cellule.Contenu.SABLE,false);}
+        for (int i = 2; i < cell[1].length-3; i++){ cell[2][i] = new Cellule(Cellule.Contenu.EAU,false); cell[cell[1].length-3][i] = new Cellule(Cellule.Contenu.EAU,false);}
+        for (int i = 2; i < cell[1].length-2; i++){cell[i][2] = new Cellule(Cellule.Contenu.EAU,false); cell[i][cell[1].length-3] = new Cellule(Cellule.Contenu.EAU,false);}
         for (int i =3; i< cell[1].length-3; i++){
             for (int j=3; j<cell[1].length-3; j++){
-                cell[i][j] = new Cellule(Cellule.Contenu.TERRE, i, j, true);
+                cell[i][j] = new Cellule(Cellule.Contenu.TERRE, true);
             }
         }
         return cell;
@@ -160,8 +144,8 @@ public class Map {
                             mobsDansCase.add(mob);
                         }
                     }
-                    if (mobsDansCase.size() == 1){ map[i][j] = Cellule.sol(Cellule.Contenu.MOB);}
-                    if (mobsDansCase.size() > 1){ map[i][j] = Cellule.sol(Cellule.Contenu.NOMBRE);
+                    if (mobsDansCase.size() == 1){ map[i][j] = new Cellule(Cellule.Contenu.MOB,false);}
+                    if (mobsDansCase.size() > 1){ map[i][j] = new Cellule(Cellule.Contenu.NOMBRE,false);
                     }
                 }
             }
