@@ -1,13 +1,14 @@
 public abstract class Humain{
-    private int pv, vitesse, degats, vitesseAttaque;
+    private int pv, vitesse, degats, vitesseAttaque, cout;
     private String type;
 
-    Humain(int pv, int vitesse, int degats, String type,int vitesseAttaque){
+    Humain(int pv, int vitesse, int degats, String type,int vitesseAttaque, int cout){
         this.pv = pv; 
         this.vitesse = vitesse; 
         this.degats = degats;
         this.type = type;
         this.vitesseAttaque = vitesseAttaque;
+        this.cout = cout;
     }
 
     public int getPv(){ return this.pv;}
@@ -19,6 +20,8 @@ public abstract class Humain{
     public int getVitesseAttaque(){ return this.vitesseAttaque;}
     
     public void setPv (int i){ this.pv-=i;}
+
+    public int getCout(){ return this.cout;}
 
     abstract void attaque(Mobs m);
 

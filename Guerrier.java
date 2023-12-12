@@ -1,6 +1,6 @@
 public class Guerrier extends Humain{
     Guerrier (int pv, int degats, int vitesse, int vitesseAttaque){
-        super(pv, vitesse, degats, "guerrier", vitesseAttaque);
+        super(pv, vitesse, degats, "guerrier", vitesseAttaque,10);
     }
 
     @Override
