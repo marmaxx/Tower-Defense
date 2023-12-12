@@ -1,6 +1,6 @@
 public class Tank extends Mobs {
 
-    Tank(){ super(0,0,100,1,9,"Tank",3);}
+    Tank(){ super(new Coordonnees(1,6),100, 100, 1,9,3,"Tank");}
     
 
     @Override

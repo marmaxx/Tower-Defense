@@ -1,6 +1,6 @@
 public class Sprinteur extends Mobs {
 
-    Sprinteur(){ super(0,0,30,10,0,"sprinteur",0);}
+    Sprinteur(){ super(new Coordonnees(1,6),30,30,10,0,0,"sprinteur");}
     
 
     @Override

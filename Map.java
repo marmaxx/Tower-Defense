@@ -1,5 +1,8 @@
+import java.util.ArrayList;
+
 public class Map {
     private Cellule [][] map;
+    public Cellule[][] getMap(){ return this.map;}
 
     Map(Cellule[][] map){this.map=map;}
 
@@ -15,7 +18,7 @@ public class Map {
         }
     }
 
-    public static Cellule[][] mapTest (){
+    /*public static Cellule[][] mapTest (){
         Cellule [][] cell = new Cellule[3][3];
         for (int i = 0; i < cell.length; i++){
             for (int j = 0; j < cell[0].length; j++){
@@ -23,9 +26,9 @@ public class Map {
             }
         }
         return cell;
-    }
+    }*/
 
-    public void map1 (){
+    public Cellule[][] map1 (){
         Cellule [][] cell = new Cellule[8][9];
         contourMap(cell);
         for (int i = 1; i < cell[1].length-1; i++){
@@ -57,11 +60,11 @@ public class Map {
             else{ cell[i][4] =  Cellule.sol(Cellule.Contenu.EAU);}
         }
         cell[6][4] = Cellule.sol(Cellule.Contenu.SABLE);
-        afficher(cell);
+        return cell;
     }
 
 
-    public void map2(){
+    public Cellule[][] map2(){
         Cellule [][] cell = new Cellule[8][9]; 
         contourMap(cell);
         for (int i = 1; i < cell[1].length-2; i++){ cell[1][i] = Cellule.sol(Cellule.Contenu.SABLE);}
@@ -73,7 +76,7 @@ public class Map {
                 cell[i][j] = Cellule.sol(Cellule.Contenu.TERRE);
             }
         }
-        afficher(cell);
+        return cell;
     }
 
     public static void printColored(Cellule.Contenu c) {
@@ -104,10 +107,12 @@ public class Map {
                     switch (contenu) {
                         case ARBRE: printColored(Cellule.Contenu.ARBRE); break;
                         case SABLE: printColored(Cellule.Contenu.SABLE); break;
-                        case TERRE: printColored(Cellule.Contenu.TERRE);; break;
-                        case EAU: printColored(Cellule.Contenu.EAU);; break;
+                        case TERRE: printColored(Cellule.Contenu.TERRE); break;
+                        case EAU: printColored(Cellule.Contenu.EAU); break;
                         case BASE_IA: printColored(Cellule.Contenu.BASE_IA); break;
-                        case BASE_HUMAIN: printColored(Cellule.Contenu.BASE_HUMAIN);; break;
+                        case BASE_HUMAIN: printColored(Cellule.Contenu.BASE_HUMAIN); break;
+                        case NOMBRE: System.out.print(mobsDansCase(i,j)); break;
+                        case MOB: System.out.print(afficheMob(i,j)); break;
                         default: break;
                     }
                 }
@@ -117,16 +122,39 @@ public class Map {
         }
     }
 
-    public char direction (int x, int y, Cellule[][] map){
-        if (map[x-1][y] != null && map[x-1][y].getContenu() == Cellule.Contenu.SABLE){ return 'g';}
-        if (map[x][y-1] != null && map[x][y-1].getContenu() == Cellule.Contenu.SABLE){ return 'h';}
-        if (map[x+1][y] != null && map[x+1][y].getContenu() == Cellule.Contenu.SABLE){ return 'd';}
-        return ' ';
+    private String afficheMob(int i, int j) {
+        String type = "";
+        for (Mobs mob : MobsSurLaMap.getMobsSurLaMap()){
+            if (mob.estDansCase(i, j)) type = mob.getType();
+        }
+        char c = type.toUpperCase().charAt(0);
+        return " "+c+" ";
     }
 
-    public void bougerVers(Mobs m, double x, double y, double vitesse) {
-        m.setX(m.getX()+vitesse*(x-m.getX()));
-        m.setY(m.getY()+vitesse*(y-m.getY()));
+    private int mobsDansCase(int i, int j) {
+        int nombre = 0;
+        for (Mobs mob : MobsSurLaMap.getMobsSurLaMap()){
+            if (mob.estDansCase(i, j)) nombre++;
+        }
+        return nombre;
+    }
+
+    public void miseAJourMap(){
+        if (MobsSurLaMap.getMobsSurLaMap().size() > 0){
+            ArrayList<Mobs> mobsDansCase = new ArrayList<>();
+            for (int i = 0; i < map.length; i++){
+                for (int j = 0; j < map[0].length; j++){
+                    for (Mobs mob : MobsSurLaMap.getMobsSurLaMap()){
+                        if (mob.estDansCase(i,j)){
+                            mobsDansCase.add(mob);
+                        }
+                    }
+                    if (mobsDansCase.size() == 1){ map[i][j] = Cellule.sol(Cellule.Contenu.MOB);}
+                    if (mobsDansCase.size() > 1){ map[i][j] = Cellule.sol(Cellule.Contenu.NOMBRE);
+                    }
+                }
+            }
+        }
     }
 
     public static void main (String [] args){
@@ -138,6 +166,5 @@ public class Map {
         System.out.println();
         System.out.println("map1 ");
         m.map1();
-
     }
 }

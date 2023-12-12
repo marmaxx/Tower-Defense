@@ -1,5 +1,6 @@
 public record Cellule (Contenu c , boolean dispo){
-    public enum Contenu { SABLE, EAU, TERRE, ARBRE, BASE_IA, BASE_HUMAIN};
+    public enum Contenu { SABLE, EAU, TERRE, ARBRE, BASE_IA, BASE_HUMAIN, NOMBRE, MOB};
+
 
     private static boolean mobs; 
     private static boolean disponible;
