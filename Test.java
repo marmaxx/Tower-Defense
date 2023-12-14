@@ -2,9 +2,9 @@ public class Test {
 
     public static void main(String [] args){
 
-        Cellule [][] cell = new Cellule[8][9];
+    
         Map m = new Map();
-        m.contourMap(cell);
+        m.contourMap(m.getMap());
         System.out.println("map2 ");
         m.map2();
         m.afficher();
@@ -13,6 +13,10 @@ public class Test {
         maj.pauseTower(5, 5, new Tourelle(10, 2, 0, 3));
 
         maj.getMapBase().afficher();
+
+        GameVue vue = new GameVue(m);
+        vue.setVisible(true);
+
     }
     
 }

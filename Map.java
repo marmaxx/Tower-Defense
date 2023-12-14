@@ -3,7 +3,9 @@ import java.util.ArrayList;
 public class Map {
     private Cellule [][] map;
 
-    Map(){}
+    Map(){
+        this.map = new Cellule[8][9];
+    }
 
     public int getHauteur(){
         return map.length;
@@ -149,6 +151,19 @@ public class Map {
                     if (mobsDansCase.size() == 1){ map[i][j] = new Cellule(Cellule.Contenu.MOB,false);}
                     if (mobsDansCase.size() > 1){ map[i][j] = new Cellule(Cellule.Contenu.NOMBRE,false);
                     }
+                }
+            }
+        }
+    }
+
+
+
+
+    public void rangeTower(){
+        for(int i = 0; i<map.length; i++){
+            for(int j = 0 ; j<map[1].length; j++){
+                if (map[i][j].isTerre()){
+
                 }
             }
         }
