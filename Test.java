@@ -4,7 +4,6 @@ public class Test {
 
     
         Map m = new Map();
-        m.contourMap(m.getMap());
         System.out.println("map2 ");
         m.map2();
         m.afficher();

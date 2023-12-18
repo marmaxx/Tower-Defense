@@ -1,5 +1,3 @@
-import java.util.LinkedList;
-
 public abstract class Humain{
     private int pv, vitesse, degats, vitesseAttaque, cout;
     private String type;
