@@ -7,7 +7,8 @@ import java.awt.*;
 
 public class GameVue extends JFrame{
 
-    private Map map;
+    private Game game;
+    private Map map = new Map();
     private JPanel ZoneJeux = new JPanel();
     private JPanel magasin = new JPanel();
 
@@ -16,9 +17,10 @@ public class GameVue extends JFrame{
     Border border = new LineBorder(Color.BLUE, 1);
     
 
-    GameVue(Map map ){
+    GameVue(Game game ){
 
-        this.map = map;
+        this.game = game; 
+        this.map.map2();
 
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
@@ -59,5 +61,7 @@ public class GameVue extends JFrame{
         this.getContentPane().setLayout(new GridLayout());
         this.add(ZoneJeux);
         this.add(magasin);
+
+        this.setVisible(true);
     }
 }

@@ -13,8 +13,8 @@ public class Test {
 
         maj.getMapBase().afficher();
 
-        GameVue vue = new GameVue(m);
-        vue.setVisible(true);
+        //GameVue vue = new GameVue();
+        //vue.setVisible(true);
 
     }
     
