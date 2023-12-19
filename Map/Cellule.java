@@ -23,7 +23,7 @@ public class Cellule {
     public Humain getHumain(){ return this.humain;}
     
 
-    Cellule (Contenu c, boolean dispo){
+    public Cellule (Contenu c, boolean dispo){
         this.contenu = c; 
         this.disponible = dispo;
     } 

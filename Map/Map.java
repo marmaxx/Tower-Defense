@@ -1,6 +1,4 @@
 package Map;
-import java.util.ArrayList;
-
 import Jeu.MobsSurLaMap;
 import Mobs.Mobs;
 
@@ -142,29 +140,29 @@ public class Map {
         return " "+nombre+" ";
     }
 
-    public void miseAJourMap(){
-        if (MobsSurLaMap.getMobsSurLaMap().size() > 0){
-            ArrayList<Mobs> mobsDansCase = new ArrayList<>();
-            for (int i = 0; i < map.length; i++){
-                for (int j = 0; j < map[0].length; j++){
-                    for (Mobs mob : MobsSurLaMap.getMobsSurLaMap()){
+    // public void miseAJourMap(){
+    //     if (MobsSurLaMap.getMobsSurLaMap().size() > 0){
+    //         ArrayList<Mobs> mobsDansCase = new ArrayList<>();
+    //         for (int i = 0; i < map.length; i++){
+    //             for (int j = 0; j < map[0].length; j++){
+    //                 for (Mobs mob : MobsSurLaMap.getMobsSurLaMap()){
                         
-                        if (mob.estDansCase(i,j)){
-                            mobsDansCase.add(mob);System.out.println(mob.getPos());
-                        }
-                    }
-                    if (mobsDansCase.size() == 1){ 
-                        map[i][j] = new Cellule(Cellule.Contenu.MOB,false); 
-                        mobsDansCase.clear();
-                    }
-                    if (mobsDansCase.size() > 1){ 
-                        map[i][j] = new Cellule(Cellule.Contenu.NOMBRE,false); 
-                        mobsDansCase.clear();
-                    }
-                }
-            }
-        }
-    }
+    //                     if (mob.estDansCase(i,j)){
+    //                         mobsDansCase.add(mob);System.out.println(mob.getPos());
+    //                     }
+    //                 }
+    //                 if (mobsDansCase.size() == 1){ 
+    //                     map[i][j] = new Cellule(Cellule.Contenu.MOB,false); 
+    //                     mobsDansCase.clear();
+    //                 }
+    //                 if (mobsDansCase.size() > 1){ 
+    //                     map[i][j] = new Cellule(Cellule.Contenu.NOMBRE,false); 
+    //                     mobsDansCase.clear();
+    //                 }
+    //             }
+    //         }
+    //     }
+    // }
 
 
 

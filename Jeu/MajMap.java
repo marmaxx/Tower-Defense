@@ -17,8 +17,6 @@ public class MajMap {
     private LinkedList<Cellule> towerList;
     private MobsSurLaMap MobsSurLaMap;
     
-
-
     public MajMap (Map mapBase, String name, MobsSurLaMap MobsSurLaMap){
         this.mapBase = mapBase; 
         this.hauteur = mapBase.getHauteur();
@@ -68,9 +66,7 @@ public class MajMap {
         }
     }
 
-
     public void update(long deltaT){
-
         LinkedList<Cellule> delete = new LinkedList<>();
         for(Cellule c : towerList){
             if(c.getHumain().estMort()){
@@ -82,6 +78,31 @@ public class MajMap {
         System.out.println(MobsSurLaMap.getMobsSurLaMap());
         for (Mobs mob : MobsSurLaMap.getMobsSurLaMap()){
             mouvement(mapBase, mob, deltaT);
+        }
+        miseAJourMap();
+    }
+
+    public void miseAJourMap(){
+        if (MobsSurLaMap.getMobsSurLaMap().size() > 0){
+            ArrayList<Mobs> mobsDansCase = new ArrayList<>();
+            for (int i = 0; i < mapBase.getHauteur(); i++){
+                for (int j = 0; j < mapBase.getLargeur(); j++){
+                    for (Mobs mob : MobsSurLaMap.getMobsSurLaMap()){
+                        
+                        if (mob.estDansCase(i,j)){
+                            mobsDansCase.add(mob);System.out.println(mob.getPos());
+                        }
+                    }
+                    if (mobsDansCase.size() == 1){ 
+                        mapBase.getMap()[i][j] = new Cellule(Cellule.Contenu.MOB,false); 
+                        mobsDansCase.clear();
+                    }
+                    if (mobsDansCase.size() > 1){ 
+                        mapBase.getMap()[i][j] = new Cellule(Cellule.Contenu.NOMBRE,false); 
+                        mobsDansCase.clear();
+                    }
+                }
+            }
         }
     }
 }

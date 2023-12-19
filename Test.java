@@ -19,14 +19,11 @@ public class Test {
         maj.getMapBase().afficher();
         
         Robot r = new Robot(mslm);
-        m.miseAJourMap();
         m.afficher();
         //Robot rr = new Robot(mslm);
         maj.update(2000000000);
-        m.miseAJourMap();
         m.afficher();
         maj.update(2000000000);
-        m.miseAJourMap();
         m.afficher();
     }
     
