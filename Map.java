@@ -2,8 +2,9 @@ import java.util.ArrayList;
 
 public class Map {
     private Cellule [][] map;
+    private MobsSurLaMap MobsSurLaMap;
 
-    Map(){}
+    Map(MobsSurLaMap MobsSurLaMap){ this.MobsSurLaMap=MobsSurLaMap;}
 
     public int getHauteur(){
         return map.length;
@@ -120,20 +121,21 @@ public class Map {
     }
 
     private String afficheMob(int i, int j) {
-        String type = "";
+        char type = ' ';
         for (Mobs mob : MobsSurLaMap.getMobsSurLaMap()){
-            if (mob.estDansCase(i, j)) type = mob.getType();
+            if (mob.estDansCase(i, j)) type = mob.getType().charAt(0);
         }
-        char c = type.toUpperCase().charAt(0);
-        return " "+c+" ";
+        //String s = type.toUpperCase();
+        //char c = s.charAt(1);
+        return " "+type+" ";
     }
 
-    private int mobsDansCase(int i, int j) {
+    private String mobsDansCase(int i, int j) {
         int nombre = 0;
         for (Mobs mob : MobsSurLaMap.getMobsSurLaMap()){
             if (mob.estDansCase(i, j)) nombre++;
         }
-        return nombre;
+        return " "+nombre+" ";
     }
 
     public void miseAJourMap(){
@@ -142,12 +144,18 @@ public class Map {
             for (int i = 0; i < map.length; i++){
                 for (int j = 0; j < map[0].length; j++){
                     for (Mobs mob : MobsSurLaMap.getMobsSurLaMap()){
+                        
                         if (mob.estDansCase(i,j)){
-                            mobsDansCase.add(mob);
+                            mobsDansCase.add(mob);System.out.println(mob.getPos());
                         }
                     }
-                    if (mobsDansCase.size() == 1){ map[i][j] = new Cellule(Cellule.Contenu.MOB,false);}
-                    if (mobsDansCase.size() > 1){ map[i][j] = new Cellule(Cellule.Contenu.NOMBRE,false);
+                    if (mobsDansCase.size() == 1){ 
+                        map[i][j] = new Cellule(Cellule.Contenu.MOB,false); 
+                        mobsDansCase.clear();
+                    }
+                    if (mobsDansCase.size() > 1){ 
+                        map[i][j] = new Cellule(Cellule.Contenu.NOMBRE,false); 
+                        mobsDansCase.clear();
                     }
                 }
             }

@@ -1,8 +1,8 @@
-import java.text.DecimalFormat;
+//import java.text.DecimalFormat;
 
 public record Coordonnees (double x, double y) {
     public static final Coordonnees ZERO = new Coordonnees(0, 0);
-    public static final Coordonnees HAUT = new Coordonnees(0, -1);
+    public static final Coordonnees HAUT = new Coordonnees(-1, 0);
     public static final Coordonnees DROITE = new Coordonnees(1, 0);
     public static final Coordonnees BAS = new Coordonnees(0, 1);
     public static final Coordonnees GAUCHE = new Coordonnees(-1, 0);
@@ -22,6 +22,10 @@ public record Coordonnees (double x, double y) {
     public Coordonnees fois(double multiplier) {
         return new Coordonnees(x * multiplier, y * multiplier);
     }
+
+    public Coordonnees round() {
+        return new Coordonnees((int) Math.round(x), (int) Math.round(y));
+    }
     
     public Coordonnees warp(int width, int height) {
         var rx = x;
@@ -37,7 +41,7 @@ public record Coordonnees (double x, double y) {
         return new Coordonnees(rx, ry);
     }
 
-    public Coordonnees roundFormat() {
+    /*public Coordonnees roundFormat() {
         double x = this.x;
         double y = this.y;
 
@@ -51,5 +55,5 @@ public record Coordonnees (double x, double y) {
         double y2 = Double.parseDouble(formattedY);
 
         return new Coordonnees(x2, y2);
-    }
+    }*/
 }

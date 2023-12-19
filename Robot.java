@@ -1,7 +1,8 @@
 public class Robot extends Mobs {
+    private MobsSurLaMap MobsSurLaMap;
 
-    Robot(){ 
-        super(new Coordonnees(6,1),50,50,1,6,1,"robot");
+    Robot(MobsSurLaMap MobsSurLaMap){ 
+        super(new Coordonnees(6,1),50,50,1,6,1,"R",MobsSurLaMap);
     }
 
     @Override
