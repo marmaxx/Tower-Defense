@@ -1,4 +1,8 @@
+package Map;
 import java.util.LinkedList;
+
+import Humain.Humain;
+import Mobs.Mobs;
 
 public class Cellule {
     public enum Contenu { SABLE, EAU, TERRE, ARBRE, BASE_IA, BASE_HUMAIN, NOMBRE, MOB};
@@ -7,7 +11,6 @@ public class Cellule {
     private boolean disponible;
     private  Humain humain = null;
     private Contenu contenu;
-    private Coordonnees position;
 
     private LinkedList<Cellule> inRange;
 

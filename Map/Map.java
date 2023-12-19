@@ -1,10 +1,14 @@
+package Map;
 import java.util.ArrayList;
+
+import Jeu.MobsSurLaMap;
+import Mobs.Mobs;
 
 public class Map {
     private Cellule [][] map;
     private MobsSurLaMap MobsSurLaMap;
 
-    Map(MobsSurLaMap MobsSurLaMap){ this.MobsSurLaMap=MobsSurLaMap;}
+    public Map(MobsSurLaMap MobsSurLaMap){ this.MobsSurLaMap=MobsSurLaMap;}
 
     public int getHauteur(){
         return map.length;

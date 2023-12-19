@@ -1,4 +1,7 @@
+package Jeu;
 import java.util.ArrayList;
+
+import Mobs.Mobs;
 
 public class MobsSurLaMap {
     private ArrayList<Mobs> mobsSurLaMap;

@@ -1,3 +1,8 @@
+package Mobs;
+import Géométrie.Coordonnees;
+import Humain.Humain;
+import Jeu.MobsSurLaMap;
+
 public class Tank extends Mobs {
     private MobsSurLaMap MobsSurLaMap;
 

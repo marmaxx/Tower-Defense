@@ -1,3 +1,4 @@
+package Géométrie;
 //import java.text.DecimalFormat;
 
 public record Coordonnees (double x, double y) {

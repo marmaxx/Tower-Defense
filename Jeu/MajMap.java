@@ -1,6 +1,13 @@
+package Jeu;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
+
+import Géométrie.Direction;
+import Humain.Humain;
+import Map.Cellule;
+import Map.Map;
+import Mobs.Mobs;
 
 public class MajMap {
     private Map mapBase;
@@ -12,7 +19,7 @@ public class MajMap {
     
 
 
-    MajMap (Map mapBase, String name, MobsSurLaMap MobsSurLaMap){
+    public MajMap (Map mapBase, String name, MobsSurLaMap MobsSurLaMap){
         this.mapBase = mapBase; 
         this.hauteur = mapBase.getHauteur();
         this.largeur = mapBase.getLargeur();

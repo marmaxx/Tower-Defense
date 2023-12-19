@@ -1,3 +1,5 @@
+package Humain;
+import Mobs.Mobs;
 public abstract class Humain{
     private int pv, vitesse, degats, vitesseAttaque, cout;
     private String type;

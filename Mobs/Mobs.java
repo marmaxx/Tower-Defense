@@ -1,6 +1,13 @@
-import java.util.List;
+package Mobs;
 
-abstract class Mobs {
+import Géométrie.Coordonnees;
+import Géométrie.Direction;
+import Humain.Humain;
+import Jeu.MobsSurLaMap;
+import Map.Cellule;
+import Map.Map;
+
+public abstract class Mobs {
     private Coordonnees pos;
     private int pv, pvActuel, vitesse, degats, vitesseAttaque;
     private Direction dir;

@@ -1,3 +1,5 @@
+package Humain;
+import Mobs.Mobs;
 public class Barriere extends Humain{
 
     Barriere(int pv) {
@@ -6,7 +8,6 @@ public class Barriere extends Humain{
     
     @Override
     void attaque(Mobs m) {
-        // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'attaque'");
     }
     

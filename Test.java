@@ -1,3 +1,9 @@
+import Humain.Tourelle;
+import Jeu.MajMap;
+import Jeu.MobsSurLaMap;
+import Map.Map;
+import Mobs.Robot;
+
 public class Test {
 
     public static void main(String [] args){

@@ -1,6 +1,9 @@
+package Jeu;
 import javax.swing.*;
 import javax.swing.border.Border;
 import javax.swing.border.LineBorder;
+
+import Map.Map;
 
 import java.awt.*;
 
