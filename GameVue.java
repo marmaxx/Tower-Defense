@@ -6,9 +6,9 @@ import java.awt.*;
 
 
 public class GameVue extends JFrame{
-
+    private MobsSurLaMap mslm;
     private Game game;
-    private Map map = new Map();
+    private Map map = new Map(mslm);
     private JPanel ZoneJeux = new JPanel();
     private JPanel magasin = new JPanel();
 
