@@ -23,7 +23,7 @@ public class GameVue extends JFrame{
     GameVue(Game game ){
 
         this.game = game; 
-        this.map.map2();
+        this.map.map1();
 
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
