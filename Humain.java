@@ -1,6 +1,7 @@
 public abstract class Humain{
     private int pv, vitesse, degats, vitesseAttaque, cout;
     private String type;
+    int range;
 
     Humain(int pv, int vitesse, int degats, String type,int vitesseAttaque, int cout){
         this.pv = pv; 
@@ -9,6 +10,7 @@ public abstract class Humain{
         this.type = type;
         this.vitesseAttaque = vitesseAttaque;
         this.cout = cout;
+        this.range = 3;
     }
 
     public int getPv(){ return this.pv;}
@@ -31,4 +33,6 @@ public abstract class Humain{
     }
 
     public boolean estMort(){ return this.pv ==0;}
+
+
 }

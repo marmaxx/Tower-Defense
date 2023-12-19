@@ -161,4 +161,17 @@ public class Map {
             }
         }
     }
+
+
+
+
+    public void rangeTower(){
+        for(int i = 0; i<map.length; i++){
+            for(int j = 0 ; j<map[1].length; j++){
+                if (map[i][j].isTerre()){
+
+                }
+            }
+        }
+    }
 }
