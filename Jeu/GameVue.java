@@ -16,13 +16,16 @@ public class GameVue extends JFrame {
     private Game game;
     private Map map = new Map(mslm);
     private JPanel ZoneJeux = new JPanel();
-    private JPanel magasin = new JPanel();
-
-    private JPanel[][] grille;
     private static JPanel plateau = new JPanel();
+    private static JPanel ZoneJouable = new JPanel();
+    private JPanel magasin = new JPanel();
 
     public static JPanel getPlateau() {
         return plateau;
+    }
+
+    public static JPanel getZoneJouable(){
+        return ZoneJouable;
     }
 
     Border border = new LineBorder(Color.BLUE, 1);
@@ -35,72 +38,73 @@ public class GameVue extends JFrame {
         Map m = new Map(mslm);
         System.out.println("map2 ");
         m.map2();
-        // m.afficher();
-
         MajMap maj = new MajMap(m, "map2");
         maj.poseTower(5, 5, new Tourelle(10, 2, 0, 3, new Coordonnees(5, 5)));
-
         Robot r = new Robot();
 
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
+        // frame
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         Dimension tailleMoniteur = Toolkit.getDefaultToolkit().getScreenSize();
         this.setTitle("Human vs AI");
         this.setSize((int) tailleMoniteur.getWidth(), (int) tailleMoniteur.getHeight());
 
-        // affichage de la partie jeux
-
+        //plateau
         plateau.setPreferredSize(
                 new Dimension((int) ((tailleMoniteur.getWidth()) / 2), (int) (tailleMoniteur.getHeight() - 200)));
         plateau.setLayout(new GridLayout(8, 9));
 
-        grille = new JPanel[this.map.getMap().length][this.map.getMap()[0].length];
-        for (int i = 0; i < grille.length; i++) {
-            for (int j = 0; j < grille[0].length; j++) {
-                grille[i][j] = new JPanel();
-                grille[i][j].setPreferredSize(
-                        new Dimension((int) (plateau.getWidth() / 8), (int) (plateau.getHeight() / 9)));
+        for (int i = 0; i < this.map.getMap().length; i++) {
+            for (int j = 0; j < this.map.getMap()[0].length; j++) {
+                JPanel p = new JPanel();
+                p.setPreferredSize(new Dimension((int) (plateau.getWidth() / 8), (int) (plateau.getHeight() / 9)));
                 switch (this.map.getMap()[i][j].getContenu()) {
-                    case TERRE:
-                        grille[i][j].setBackground(new Color(197, 197, 197));
-                        break;
-                    case EAU:
-                        grille[i][j].setBackground(new Color(18, 101, 189));
-                        break;
-                    case SABLE:
-                        grille[i][j].setBackground(new Color(247, 208, 118));
-                        break;
-                    case ARBRE:
-                        grille[i][j].setBackground(new Color(10, 84, 13));
-                        break;
-                    default:
-                        break;
+                    case TERRE: p.setBackground(new Color(197, 197, 197)); break;
+                    case EAU: p.setBackground(new Color(18, 101, 189)); break;
+                    case SABLE: p.setBackground(new Color(247, 208, 118)); break;
+                    case ARBRE: p.setBackground(new Color(10, 84, 13)); break;
+                    default: break;
                 }
-                plateau.add(grille[i][j]);
+                plateau.add(p);
             }
         }
 
-        ZoneJeux.setLayout(new BorderLayout());
-        OverlayLayout overlayout = new OverlayLayout(ZoneJeux);
-        ZoneJeux.setLayout(overlayout);
+        //zone de jouable 
+        ZoneJouable.setPreferredSize(new Dimension((int) ((tailleMoniteur.getWidth()) / 2), (int) (tailleMoniteur.getHeight() -200)));
+        OverlayLayout overlayout = new OverlayLayout(ZoneJouable);
+        ZoneJouable.setLayout(overlayout);
         for (Mobs mob : MobsSurLaMap.getInstance().getMobsSurLaMap()) {
             JPanel panel = new GraphismeMobs(mob);
-            //panel.setPreferredSize(new Dimension(60, 60));
-            panel.setBounds((int) mob.getPos().getX(), (int) mob.getPos().getY(), 60, 60);
-            panel.setLayout(null);
-            ZoneJeux.add(panel);
+            ZoneJouable.add(panel);
         }
-        ZoneJeux.add(plateau, BorderLayout.SOUTH);
+        ZoneJouable.add(plateau);
 
-        // affichage de la partie utilitaire
-        // magasin.setPreferredSize(new Dimension((int) tailleMoniteur.getWidth() / 2,
-        // (int) tailleMoniteur.getHeight()));
+        //zone de jeu
+        ZoneJeux.setLayout(new BorderLayout());
+        ZoneJeux.add(ZoneJouable, BorderLayout.SOUTH);
+
+        //zone magasin
         magasin.setBackground(new Color(78, 66, 78));
 
+
+        //fenetre
         this.getContentPane().setLayout(new GridLayout());
         this.add(ZoneJeux);
         this.add(magasin);
-
         this.setVisible(true);
+    }
+
+    public Component getComponentAt(int row, int col) {
+        LayoutManager layoutManager = plateau.getLayout();
+    
+        if (layoutManager instanceof GridLayout) {
+            GridLayout gridLayout = (GridLayout) layoutManager;
+            int columns = gridLayout.getColumns();
+            int index = row * columns + col;
+            return plateau.getComponent(index);
+        }
+    
+        // Gérer le cas où le gestionnaire de disposition n'est pas GridLayout
+        return null;
     }
 }
