@@ -22,6 +22,8 @@ public abstract class Humain{
     }
 
     public int getPv(){ return this.pv;}
+
+    public String getType(){ return this.type;}
     
     public int getVitesse(){ return this.vitesse;}
     

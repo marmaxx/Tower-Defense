@@ -5,6 +5,7 @@ import javax.swing.border.Border;
 import javax.swing.border.LineBorder;
 
 import Géométrie.Coordonnees;
+import Humain.Humain;
 import Humain.Tourelle;
 import Map.Map;
 import Mobs.Mobs;
@@ -14,6 +15,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.io.IOException;
 
 public class GameVue extends JFrame implements ActionListener, MouseListener{
     private Game game;
@@ -36,13 +38,12 @@ public class GameVue extends JFrame implements ActionListener, MouseListener{
 
     Border border = new LineBorder(Color.BLUE, 1);
 
-    GameVue(Game game) {
+    GameVue(Game game) throws IOException {
 
         this.game = game;
         map.map2();
-        maj = new MajMap(map, "map2 ");
-        // m.afficher();
-        maj.poseTower(5, 5, new Tourelle(10, 2, 0, 3, new Coordonnees(5, 5)));
+        maj = new MajMap(map, "map2");
+        maj.poseTower(new Tourelle(10, 2, 0, 3, new Coordonnees(5, 5)));
 
         new Robot();
 
@@ -55,8 +56,7 @@ public class GameVue extends JFrame implements ActionListener, MouseListener{
 
         //plateau
         plateau.setPreferredSize(
-                new Dimension((int) ((tailleMoniteur.getWidth()) / 2), (int) (tailleMoniteur.getHeight() - 200)));
-        //plateau.setLayout(new GridLayout(8, 9));
+                new Dimension((int) ((tailleMoniteur.getWidth()) / 2), (int) (tailleMoniteur.getHeight())));
 
         for (int i = 0; i < this.map.getMap().length; i++) {
             for (int j = 0; j < this.map.getMap()[0].length; j++) {
@@ -74,13 +74,19 @@ public class GameVue extends JFrame implements ActionListener, MouseListener{
         }
 
         //zone jouable 
-        ZoneJouable.setPreferredSize(new Dimension((int) ((tailleMoniteur.getWidth()) / 2), (int) (tailleMoniteur.getHeight() -200)));
+        ZoneJouable.setPreferredSize(new Dimension((int) ((tailleMoniteur.getWidth()) / 2), (int) (tailleMoniteur.getHeight() )));
         OverlayLayout overlayout = new OverlayLayout(ZoneJouable);
         ZoneJouable.setLayout(overlayout);
         for (Mobs mob : MobsSurLaMap.getInstance().getMobsSurLaMap()) {
             JPanel panel = new GraphismeMobs(mob);
             ZoneJouable.add(panel);
         }
+
+        for (Humain tower : TourSurLaMap.getInstance().getTourSurLaMap()) {
+            JPanel panel = new GraphismeTour(tower);
+            ZoneJouable.add(panel);
+        }
+
         ZoneJouable.add(plateau);
 
         //zone de jeu
@@ -88,8 +94,8 @@ public class GameVue extends JFrame implements ActionListener, MouseListener{
         ZoneJeux.add(ZoneJouable, BorderLayout.SOUTH);
 
         //zone magasin
-        magasin.setBackground(new Color(78, 66, 78));
 
+        this.magasin = new ShopPanel();
 
         //fenetre
         this.getContentPane().setLayout(new GridLayout());

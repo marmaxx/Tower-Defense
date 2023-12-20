@@ -14,22 +14,21 @@ public class MajMap {
     private final int hauteur;
     private final int largeur;
     private final String name;
-    private LinkedList<Cellule> towerList;
     
     public MajMap (Map mapBase, String name){
         this.mapBase = mapBase; 
         this.hauteur = mapBase.getHauteur();
         this.largeur = mapBase.getLargeur();
         this.name = name;
-        this.towerList = new LinkedList<>();
     }
 
     public Map getMapBase(){
         return mapBase;
     }
 
-    public void poseTower(int x ,int y, Humain tower){
-
+    public void poseTower(Humain tower){
+        int x = (int) tower.getPos().getX();
+        int y = (int) tower.getPos().getY();
         try {
             mapBase.getMap()[x][y].getDispo();
         }
@@ -39,8 +38,7 @@ public class MajMap {
         finally {
             if (mapBase.getMap()[x][y].getDispo()){
             mapBase.getMap()[x][y].setDisponible(false);
-            mapBase.getMap()[x][y].setHumain(tower);
-            towerList.add(mapBase.getMap()[x][y]);
+            TourSurLaMap.getInstance().getTourSurLaMap().add(tower);
             } else { System.out.println("Case non disponible");}
         }
     }
@@ -75,15 +73,14 @@ public class MajMap {
     }
 
     public void update(long deltaT){
-        LinkedList<Cellule> delete = new LinkedList<>();
-        for(Cellule c : towerList){
-            if(c.getHumain().estMort()){
-                delete.add(c);
-                c.setHumain(null);
+        LinkedList<Humain> delete = new LinkedList<>();
+        for(Humain h : TourSurLaMap.getInstance().getTourSurLaMap()){
+            if(h.estMort()){
+                delete.add(h);
             }
         }
-        towerList.removeAll(delete);
-        //System.out.println(MobsSurLaMap.getMobsSurLaMap());
+        TourSurLaMap.getInstance().getTourSurLaMap().removeAll(delete);
+
         for (Mobs mob : MobsSurLaMap.getInstance().getMobsSurLaMap()){
             mouvement(mapBase, mob, deltaT);
         }

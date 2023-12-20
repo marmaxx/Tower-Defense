@@ -1,10 +1,11 @@
 package Jeu;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.io.IOException;
 
 public class Game implements KeyListener{
     private int score, argent, vieBase;
-    public static void main (String [] args){
+    public static void main (String [] args) throws IOException{
         new Game();
     }
 
@@ -12,7 +13,7 @@ public class Game implements KeyListener{
 
     public GameVue getGameVue(){ return this.gameVue;}
     
-    public Game(){
+    public Game() throws IOException{
         this.gameVue = new GameVue(this);
         //gameVue.startGame();
     }

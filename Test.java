@@ -15,8 +15,8 @@ public class Test {
 
         MajMap maj = new MajMap(m,"map2");
         //Tourelle t = new Tourelle(10, 25, 0, 3, new Coordonnees(4, 3));
-        Mortier mo = new Mortier(10,20,0,2,new Coordonnees(4, 3));
-        maj.poseTower(4, 3, mo);
+        Mortier mo = new Mortier(10,20,0,2,new Coordonnees(5, 5));
+        maj.poseTower(mo);
 
         Robot r = new Robot();
         //System.out.println("Premier affichage:");
@@ -73,9 +73,9 @@ public class Test {
 
         mo.setCible(new MobsInRangeMortier(mo));
         System.out.println("pv de r: " +r.getPv());
-        System.out.println("pv de rr: " +rr.getPv());
+        //System.out.println("pv de rr: " +rr.getPv());
         mo.getCible().attaque();
-        System.out.println("pv de r: " +r.getPv());
+        //System.out.println("pv de r: " +r.getPv());
         System.out.println("pv de rr: " +rr.getPv());
 
 
