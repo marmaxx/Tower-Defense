@@ -72,7 +72,7 @@ public class GameVue extends JFrame implements ActionListener, MouseListener{
         }
 
         //zone jouable 
-        ZoneJouable.setPreferredSize(new Dimension((int) ((tailleMoniteur.getWidth()) / 2), (int) (tailleMoniteur.getHeight() )));
+        ZoneJouable.setPreferredSize(new Dimension((int) ((tailleMoniteur.getWidth()) / 2), (int) (tailleMoniteur.getHeight()-200)));
         OverlayLayout overlayout = new OverlayLayout(ZoneJouable);
         ZoneJouable.setLayout(overlayout);
         for (Mobs mob : MobsSurLaMap.getInstance().getMobsSurLaMap()) {

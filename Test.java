@@ -1,5 +1,6 @@
 import Géométrie.Coordonnees;
 import Humain.Mortier;
+import Humain.Tourelle;
 import Jeu.MajMap;
 import Map.Map;
 import Mobs.Robot;
@@ -12,9 +13,9 @@ public class Test {
         m.map2();
 
         MajMap maj = new MajMap(m,"map2");
-        //Tourelle t = new Tourelle(10, 25, 0, 3, new Coordonnees(5, 5));
-        Mortier mo = new Mortier(10,5,0,2,new Coordonnees(5, 5));
-        maj.poseTower(mo);
+        Tourelle t = new Tourelle(10, 25, 0, 3, new Coordonnees(5, 5));
+        //Mortier mo = new Mortier(10,5,0,2,new Coordonnees(5, 5));
+        maj.poseTower(t);
 
         Robot r = new Robot();
         //System.out.println("Premier affichage:");
