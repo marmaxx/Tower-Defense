@@ -13,6 +13,7 @@ public class MobsSurLaMap {
 
     public ArrayList<Mobs> getMobsSurLaMap(){ return this.mobsSurLaMap;}
 
-
-    public void ajoutMob (Mobs mob){ mobsSurLaMap.add(mob);}
+    public void reset(){
+        MobsSurLaMap.getInstance().getMobsSurLaMap().clear();
+    }
 }

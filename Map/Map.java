@@ -4,9 +4,6 @@ import Mobs.Mobs;
 
 public class Map {
     private Cellule [][] map;
-    private MobsSurLaMap MobsSurLaMap;
-
-    public Map(MobsSurLaMap MobsSurLaMap){ this.MobsSurLaMap=MobsSurLaMap;}
 
     public int getHauteur(){
         return map.length;
@@ -124,7 +121,7 @@ public class Map {
 
     private String afficheMob(int i, int j) {
         char type = ' ';
-        for (Mobs mob : MobsSurLaMap.getMobsSurLaMap()){
+        for (Mobs mob : MobsSurLaMap.getInstance().getMobsSurLaMap()){
             if (mob.estDansCase(i, j)) type = mob.getType().charAt(0);
         }
         //String s = type.toUpperCase();
@@ -134,7 +131,7 @@ public class Map {
 
     private String mobsDansCase(int i, int j) {
         int nombre = 0;
-        for (Mobs mob : MobsSurLaMap.getMobsSurLaMap()){
+        for (Mobs mob : MobsSurLaMap.getInstance().getMobsSurLaMap()){
             if (mob.estDansCase(i, j)) nombre++;
         }
         return " "+nombre+" ";

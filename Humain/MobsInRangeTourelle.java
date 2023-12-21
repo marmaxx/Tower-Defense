@@ -15,7 +15,7 @@ public class MobsInRangeTourelle implements MobsInRange{
 
     public ArrayList<Mobs> mobsInrange(){
         ArrayList<Mobs> inRange = new ArrayList<>();
-        ArrayList<Mobs> MobsInMaps = MobsSurLaMap.getMobsSurLaMap();
+        ArrayList<Mobs> MobsInMaps = MobsSurLaMap.getInstance().getMobsSurLaMap();
 
         for(Mobs m : MobsInMaps){
             double distance = Math.sqrt(Math.pow(Math.abs(m.getPos().getX()-tourelle.getPos().getX()),2)

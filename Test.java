@@ -2,15 +2,13 @@ import Géométrie.Coordonnees;
 import Humain.Mortier;
 import Humain.MobsInRangeMortier;
 import Jeu.MajMap;
-import Jeu.MobsSurLaMap;
 import Map.Map;
 import Mobs.Robot;
 
 public class Test {
 
     public static void main(String [] args){
-        MobsSurLaMap mslm = new MobsSurLaMap();
-        Map m = new Map(mslm);
+        Map m = new Map();
         System.out.println("map2 ");
         m.map2();
         //m.afficher();
