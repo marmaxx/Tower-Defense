@@ -5,10 +5,13 @@ import java.io.File;
 import java.io.IOException;
 import javax.imageio.ImageIO;
 import javax.swing.*;
+import Jeu.GameVue;
+
+import Géométrie.Coordonnees;
 import Mobs.Mobs;
+
 public class GraphismeMobs extends JPanel{
     private Mobs mob;
-
     public GraphismeMobs(Mobs mob){
         this.mob=mob;
     }
@@ -16,7 +19,7 @@ public class GraphismeMobs extends JPanel{
     public void paintComponent(Graphics g){
         try{
             Image image = ImageIO.read(new File(getUrl(mob)));
-            g.drawImage(image,1, 6, 60, 60, this);
+            g.drawImage(image,(int)positionY(), (int)positionX(), GameVue.getZoneJouable().getWidth()/9, GameVue.getZoneJouable().getHeight()/8,this);
         }
         catch (IOException e){
             e.printStackTrace();
@@ -32,5 +35,17 @@ public class GraphismeMobs extends JPanel{
             case "Ti": url = "ressources/Tireur.png"; break;
         }
         return url;
+    }
+
+    public double positionX(){
+        double hauteur = GameVue.getZoneJouable().getHeight();
+        double sizecase = hauteur/8;
+        return Math.floor(mob.getPos().getX() * sizecase);
+    }
+
+     public double positionY(){
+        double largeur = GameVue.getZoneJouable().getWidth();
+        double sizecase = largeur/9;
+        return Math.floor(mob.getPos().getY() * sizecase);
     }
 }
