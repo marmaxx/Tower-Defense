@@ -1,8 +1,12 @@
 package Jeu;
 
 import javax.swing.*;
-import javax.swing.border.Border;
-import javax.swing.border.LineBorder;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+import java.io.IOException;
 
 import Géométrie.Coordonnees;
 import Humain.Humain;
@@ -10,12 +14,7 @@ import Humain.Tourelle;
 import Map.Map;
 import Mobs.Mobs;
 import Mobs.Robot;
-import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
-import java.io.IOException;
+
 
 public class GameVue extends JFrame implements ActionListener, MouseListener{
     private Game game;
@@ -36,7 +35,6 @@ public class GameVue extends JFrame implements ActionListener, MouseListener{
         return ZoneJouable;
     }
 
-    Border border = new LineBorder(Color.BLUE, 1);
 
     GameVue(Game game) throws IOException {
 
