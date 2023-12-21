@@ -5,9 +5,6 @@ import java.io.File;
 import java.io.IOException;
 import javax.imageio.ImageIO;
 import javax.swing.*;
-import Jeu.GameVue;
-
-import Géométrie.Coordonnees;
 import Mobs.Mobs;
 
 public class GraphismeMobs extends JPanel{

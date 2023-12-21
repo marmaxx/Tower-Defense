@@ -5,7 +5,6 @@ import javax.swing.border.Border;
 import javax.swing.border.LineBorder;
 
 import Géométrie.Coordonnees;
-import Géométrie.Coordonnees;
 import Humain.Tourelle;
 import Map.Map;
 import Mobs.Mobs;
@@ -20,13 +19,11 @@ public class GameVue extends JFrame implements ActionListener, MouseListener{
     private Game game;
     private Map map = new Map();
     private JPanel ZoneJeux = new JPanel();
-    private static JPanel plateau = new JPanel();
     private static JPanel ZoneJouable = new JPanel();
     private JPanel magasin = new JPanel();
     private MajMap maj;
     private Timer timer;
 
-    private JPanel[][] grille;
     private static JPanel plateau = new JPanel(new GridLayout(8,9));
 
     public static JPanel getPlateau() {
@@ -76,7 +73,7 @@ public class GameVue extends JFrame implements ActionListener, MouseListener{
             }
         }
 
-        //zone de jouable 
+        //zone jouable 
         ZoneJouable.setPreferredSize(new Dimension((int) ((tailleMoniteur.getWidth()) / 2), (int) (tailleMoniteur.getHeight() -200)));
         OverlayLayout overlayout = new OverlayLayout(ZoneJouable);
         ZoneJouable.setLayout(overlayout);
