@@ -15,22 +15,20 @@ public class MajMap {
     private final int largeur;
     private final String name;
     private LinkedList<Cellule> towerList;
-    private MobsSurLaMap MobsSurLaMap;
     
-    public MajMap (Map mapBase, String name, MobsSurLaMap MobsSurLaMap){
+    public MajMap (Map mapBase, String name){
         this.mapBase = mapBase; 
         this.hauteur = mapBase.getHauteur();
         this.largeur = mapBase.getLargeur();
         this.name = name;
         this.towerList = new LinkedList<>();
-        this.MobsSurLaMap=MobsSurLaMap;
     }
 
     public Map getMapBase(){
         return mapBase;
     }
 
-    public void pauseTower(int x ,int y, Humain tower){
+    public void poseTower(int x ,int y, Humain tower){
 
         try {
             mapBase.getMap()[x][y].getDispo();
@@ -49,20 +47,30 @@ public class MajMap {
 
     public void mouvement(Map m, Mobs mob, long deltaT){
         if (mob.estAuMilieu()){
-            var nextPos = mob.nextPos(deltaT);
-            for (Direction dir : List.of(Direction.NORTH, Direction.EAST, Direction.SOUTH, Direction.WEST)){
-                switch(dir){
-                    case NORTH: if (mob.isSandInFront(dir,m)){ mob.setDirection(dir);}
-                    case EAST: if (mob.isSandInFront(dir,m)){ mob.setDirection(dir);}
-                    case SOUTH: if (mob.isSandInFront(dir,m)){ mob.setDirection(dir);}
-                    case WEST: if (mob.isSandInFront(dir,m)){ mob.setDirection(dir);}
-                    default: mob.setDirection(Direction.NONE);
-                }
-            }
-            mob.setPos(nextPos.warp(largeur,hauteur));
+            
+            //System.out.println("pos: "+mob.getPos());
+            //System.out.println("nextpos: "+nextPos);
             if (!mob.isSandInFront(mob.getDirection(), m)){
                 mob.setDirection(Direction.NONE);
+                ArrayList<Direction> dirPossible = new ArrayList<>();
+                for (Direction dir : List.of(Direction.NORTH, Direction.EAST, Direction.SOUTH, Direction.WEST)){
+                    dirPossible.add(dir);
+                }
+                dirPossible.remove(mob.getDirection());
+                for (Direction dir : dirPossible){
+                    switch(dir){
+                        case NORTH: if (mob.isSandInFront(dir,m)){ mob.setDirection(dir);} break;
+                        case EAST: if (mob.isSandInFront(dir,m)){ mob.setDirection(dir);} break;
+                        case SOUTH: if (mob.isSandInFront(dir,m)){ mob.setDirection(dir);} break; 
+                        case WEST: if (mob.isSandInFront(dir,m)){ mob.setDirection(dir);} break;
+                        default: mob.setDirection(Direction.NONE); break;
+                    }
+                }
             }
+            var nextPos = mob.nextPos(deltaT);
+            mob.setPos(nextPos.warp(largeur,hauteur));
+            //System.out.println(mob.getDirection());
+            //System.out.println("pos: "+mob.getPos());
         }
     }
 
@@ -75,22 +83,22 @@ public class MajMap {
             }
         }
         towerList.removeAll(delete);
-        System.out.println(MobsSurLaMap.getMobsSurLaMap());
-        for (Mobs mob : MobsSurLaMap.getMobsSurLaMap()){
+        //System.out.println(MobsSurLaMap.getMobsSurLaMap());
+        for (Mobs mob : MobsSurLaMap.getInstance().getMobsSurLaMap()){
             mouvement(mapBase, mob, deltaT);
         }
         miseAJourMap();
     }
 
     public void miseAJourMap(){
-        if (MobsSurLaMap.getMobsSurLaMap().size() > 0){
+        if (MobsSurLaMap..getInstance().getMobsSurLaMap().size() > 0){
             ArrayList<Mobs> mobsDansCase = new ArrayList<>();
             for (int i = 0; i < mapBase.getHauteur(); i++){
                 for (int j = 0; j < mapBase.getLargeur(); j++){
-                    for (Mobs mob : MobsSurLaMap.getMobsSurLaMap()){
+                    for (Mobs mob : MobsSurLaMap.getInstance().getMobsSurLaMap()){
                         
                         if (mob.estDansCase(i,j)){
-                            mobsDansCase.add(mob);System.out.println(mob.getPos());
+                            mobsDansCase.add(mob);
                         }
                     }
                     if (mobsDansCase.size() == 1){ 

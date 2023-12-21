@@ -5,6 +5,9 @@ import Mobs.Mobs;
 
 public class MobsSurLaMap {
     private ArrayList<Mobs> mobsSurLaMap;
+    private static final MobsSurLaMap INSTANCE = new MobsSurLaMap();
+
+    public static MobsSurLaMap getInstance(){ return INSTANCE;}
 
     public MobsSurLaMap (){ mobsSurLaMap = new ArrayList<Mobs>();}
 

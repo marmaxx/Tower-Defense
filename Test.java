@@ -16,15 +16,50 @@ public class Test {
         MajMap maj = new MajMap(m,"map2", mslm);
         maj.pauseTower(5, 5, new Tourelle(10, 2, 0, 3));
 
-        maj.getMapBase().afficher();
-        
         Robot r = new Robot(mslm);
-        m.afficher();
+        //System.out.println("Premier affichage:");
+        //maj.update(0);
+        //m.afficher();
         //Robot rr = new Robot(mslm);
-        maj.update(2000000000);
+        maj.update(0);
         m.afficher();
-        maj.update(2000000000);
+        maj.update(1000000000);
         m.afficher();
+        maj.update(1000000000);
+        m.afficher();
+        maj.update(1000000000);
+        m.afficher();
+        maj.update(1000000000);
+        m.afficher();
+        maj.update(1000000000);
+        m.afficher();
+        maj.update(1000000000);
+        m.afficher();
+        maj.update(1000000000);
+        m.afficher();
+        maj.update(1000000000);
+        m.afficher();
+        maj.update(1000000000);
+        m.afficher();
+        maj.update(1000000000);
+        m.afficher();
+        maj.update(1000000000);
+        m.afficher();
+        maj.update(1000000000);
+        m.afficher();
+        maj.update(1000000000);
+        m.afficher();
+        maj.update(1000000000);
+        m.afficher();
+        maj.update(1000000000);
+        m.afficher();
+        maj.update(1000000000);
+        m.afficher();
+        //m.afficher();
+        // maj.update(2000000);
+        // m.afficher();
+        // maj.update(2000000);
+        // m.afficher();
     }
     
 }

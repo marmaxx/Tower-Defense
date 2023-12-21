@@ -13,9 +13,8 @@ public abstract class Mobs {
     private Direction dir;
     private String type;
     private final Coordonnees positionInitiale = new Coordonnees(1, 6);
-    private MobsSurLaMap MobsSurLaMap;
 
-    Mobs(Coordonnees pos, int pv, int pvActuel, int vitesse, int degats, int vitesseAttaque, String type, MobsSurLaMap MobsSurLaMap){
+    Mobs(Coordonnees pos, int pv, int pvActuel, int vitesse, int degats, int vitesseAttaque, String type){
         this.pos = pos;
         this.pv = pv; 
         this.pvActuel=pvActuel;
@@ -24,9 +23,8 @@ public abstract class Mobs {
         this.vitesseAttaque = vitesseAttaque;
         this.type = type;
         this.dir = Direction.NORTH;
-        this.MobsSurLaMap=MobsSurLaMap;
         try{
-            MobsSurLaMap.ajoutMob(this);
+            MobsSurLaMap.getInstance().getMobsSurLaMap().add(this);
         }
         catch (Exception e){
             System.out.println("MobsSurLaMap null");
@@ -67,7 +65,7 @@ public abstract class Mobs {
     }
 
     public Coordonnees nextPos(long deltaTNanoSeconds) {
-        return getPos().plus((switch (getDirection()) {
+        return this.getPos().plus((switch (getDirection()) {
             case NONE -> Coordonnees.ZERO;
             case NORTH -> Coordonnees.HAUT;
             case EAST -> Coordonnees.DROITE;
@@ -76,37 +74,20 @@ public abstract class Mobs {
         }).fois(getVitesse() * deltaTNanoSeconds * 1E-9));
     }
 
-    // public void mouvement(Map m, Coordonnees curPos, long deltaT){
-    //     if (estAuMilieu()){
-    //         var nextPos = this.nextPos(deltaT);
-    //         for (Direction dir : List.of(Direction.NORTH, Direction.EAST, Direction.SOUTH, Direction.WEST)){
-    //             switch(dir){
-    //                 case NORTH: if (isSandInFront(dir,m)){ setDirection(dir);}
-    //                 case EAST: if (isSandInFront(dir,m)){ setDirection(dir);}
-    //                 case SOUTH: if (isSandInFront(dir,m)){ setDirection(dir);}
-    //                 case WEST: if (isSandInFront(dir,m)){ setDirection(dir);}
-    //                 default: setDirection(Direction.NONE);
-    //             }
-    //         }
-    //         this.setPos(nextPos.warp())
-    //     }
-    // }
-
     public boolean isSandInFront(Direction dir, Map m){
-        int x = (int)Math.round(getPos().getX());
-        int y = (int)Math.round(getPos().getY());
+        boolean b = false;
+        int x = (int)Math.abs(getPos().getX());
+        int y = (int)Math.abs(getPos().getY());
+        //System.out.println("x = "+x+" y = "+y);
         switch(dir){
-            case NORTH: if(m.getMap()[x][y-1].getContenu()==Cellule.Contenu.SABLE){ return true;}
-            case EAST: if(m.getMap()[x+1][y].getContenu()==Cellule.Contenu.SABLE){ return true;}
-            case SOUTH: if(m.getMap()[x][y+1].getContenu()==Cellule.Contenu.SABLE){ return true;}
-            case WEST: if(m.getMap()[x-1][y].getContenu()==Cellule.Contenu.SABLE){ return true;}
-            default: return false;
+            case NORTH: if(m.getMap()[x-1][y].getContenu()==Cellule.Contenu.SABLE){ b = true;} break;
+            case EAST: if(m.getMap()[x][y+1].getContenu()==Cellule.Contenu.SABLE){ b = true;} break;
+            case SOUTH: if(m.getMap()[x+1][y].getContenu()==Cellule.Contenu.SABLE){ b = true;} break; 
+            case WEST: if(m.getMap()[x][y-1].getContenu()==Cellule.Contenu.SABLE){ b = true;} break;
+            default: b = false;
         }
+        return b;
     }
-
-    // public void miseAJour(Map m){
-    //     mouvement(m);
-    // }
 
     public boolean estDansCase(int i, int j) {
         return ((getPos().getX() == (i+i+1)/2 && getPos().getY() < j+1 && getPos().getY() >= j) || (getPos().getX() < i+1 && getPos().getX() >= i && getPos().getY() == (j+j+1)/2));

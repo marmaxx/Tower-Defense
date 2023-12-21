@@ -4,9 +4,9 @@ package Géométrie;
 public record Coordonnees (double x, double y) {
     public static final Coordonnees ZERO = new Coordonnees(0, 0);
     public static final Coordonnees HAUT = new Coordonnees(-1, 0);
-    public static final Coordonnees DROITE = new Coordonnees(1, 0);
-    public static final Coordonnees BAS = new Coordonnees(0, 1);
-    public static final Coordonnees GAUCHE = new Coordonnees(-1, 0);
+    public static final Coordonnees DROITE = new Coordonnees(0, 1);
+    public static final Coordonnees BAS = new Coordonnees(1, 0);
+    public static final Coordonnees GAUCHE = new Coordonnees(0, -1);
 
     public double getX() {
         return this.x;
