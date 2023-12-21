@@ -12,8 +12,8 @@ public class Test {
         m.map2();
 
         MajMap maj = new MajMap(m,"map2");
-        Tourelle t = new Tourelle(10, 25, 0, 3, new Coordonnees(5, 5));
-        //Mortier mo = new Mortier(10,5,0,2,new Coordonnees(5, 5));
+        Tourelle t = new Tourelle(new Coordonnees(5, 5));
+        //Mortier mo = new Mortier(new Coordonnees(5, 5));
         maj.poseTower(t);
 
         Robot r = new Robot();
