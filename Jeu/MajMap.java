@@ -91,7 +91,7 @@ public class MajMap {
     }
 
     public void miseAJourMap(){
-        if (MobsSurLaMap..getInstance().getMobsSurLaMap().size() > 0){
+        if (MobsSurLaMap.getInstance().getMobsSurLaMap().size() > 0){
             ArrayList<Mobs> mobsDansCase = new ArrayList<>();
             for (int i = 0; i < mapBase.getHauteur(); i++){
                 for (int j = 0; j < mapBase.getLargeur(); j++){

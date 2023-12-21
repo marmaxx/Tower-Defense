@@ -15,7 +15,7 @@ public class MobsInRangeMortier {
 
     public ArrayList<Mobs> mobsInrangeMortier(){
         ArrayList<Mobs> inRange = new ArrayList<>();
-        ArrayList<Mobs> MobsInMaps = MobsSurLaMap.getMobsSurLaMap();
+        ArrayList<Mobs> MobsInMaps = MobsSurLaMap.getInstance().getMobsSurLaMap();
 
         for(Mobs m : MobsInMaps){
             double distance = Math.sqrt(Math.pow(Math.abs(m.getPos().getX()-mortier.getPos().getX()),2)

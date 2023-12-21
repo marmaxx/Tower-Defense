@@ -4,6 +4,7 @@ import javax.swing.*;
 import javax.swing.border.Border;
 import javax.swing.border.LineBorder;
 
+import Géométrie.Coordonnees;
 import Humain.Tourelle;
 import Map.Map;
 import Mobs.Mobs;
@@ -37,7 +38,7 @@ public class GameVue extends JFrame {
         // m.afficher();
 
         MajMap maj = new MajMap(m, "map2");
-        maj.poseTower(5, 5, new Tourelle(10, 2, 0, 3));
+        maj.poseTower(5, 5, new Tourelle(10, 2, 0, 3, new Coordonnees(5, 5)));
 
         Robot r = new Robot();
 
