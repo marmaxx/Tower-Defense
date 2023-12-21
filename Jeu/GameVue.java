@@ -4,21 +4,27 @@ import javax.swing.*;
 import javax.swing.border.Border;
 import javax.swing.border.LineBorder;
 
+import Géométrie.Coordonnees;
 import Humain.Tourelle;
 import Map.Map;
 import Mobs.Mobs;
 import Mobs.Robot;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 
-public class GameVue extends JFrame {
-    private MobsSurLaMap mslm;
+public class GameVue extends JFrame implements ActionListener, MouseListener{
     private Game game;
-    private Map map = new Map(mslm);
+    private Map map = new Map();
     private JPanel ZoneJeux = new JPanel();
     private JPanel magasin = new JPanel();
+    private MajMap maj;
+    private Timer timer;
 
     private JPanel[][] grille;
-    private static JPanel plateau = new JPanel();
+    private static JPanel plateau = new JPanel(new GridLayout(8,9));
 
     public static JPanel getPlateau() {
         return plateau;
@@ -29,17 +35,12 @@ public class GameVue extends JFrame {
     GameVue(Game game) {
 
         this.game = game;
-        this.map.map1();
-        MobsSurLaMap mslm = new MobsSurLaMap();
-        Map m = new Map(mslm);
-        System.out.println("map2 ");
-        m.map2();
+        map.map2();
+        maj = new MajMap(map, "map2 ");
         // m.afficher();
+        maj.poseTower(5, 5, new Tourelle(10, 2, 0, 3, new Coordonnees(5, 5)));
 
-        MajMap maj = new MajMap(m, "map2");
-        maj.poseTower(5, 5, new Tourelle(10, 2, 0, 3));
-
-        Robot r = new Robot();
+        new Robot();
 
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
@@ -51,7 +52,7 @@ public class GameVue extends JFrame {
 
         plateau.setPreferredSize(
                 new Dimension((int) ((tailleMoniteur.getWidth()) / 2), (int) (tailleMoniteur.getHeight() - 200)));
-        plateau.setLayout(new GridLayout(8, 9));
+        //plateau.setLayout(new GridLayout(8, 9));
 
         grille = new JPanel[this.map.getMap().length][this.map.getMap()[0].length];
         for (int i = 0; i < grille.length; i++) {
@@ -84,8 +85,8 @@ public class GameVue extends JFrame {
         ZoneJeux.setLayout(overlayout);
         for (Mobs mob : MobsSurLaMap.getInstance().getMobsSurLaMap()) {
             JPanel panel = new GraphismeMobs(mob);
-            //panel.setPreferredSize(new Dimension(60, 60));
-            panel.setBounds((int) mob.getPos().getX(), (int) mob.getPos().getY(), 60, 60);
+            panel.setPreferredSize(new Dimension(60, 60));
+            //panel.setBounds((int) mob.getPos().getX(), (int) mob.getPos().getY(), 60, 60);
             panel.setLayout(null);
             ZoneJeux.add(panel);
         }
@@ -101,5 +102,47 @@ public class GameVue extends JFrame {
         this.add(magasin);
 
         this.setVisible(true);
+        timer = new Timer(20, new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                System.out.println("actionperformed");
+                update();
+            }
+        });
+        timer.start();
     }
+
+    public void startGame(){
+        game.start();
+        timer.start();
+    }
+
+    public void start (){
+
+    }
+
+    public void update (){
+        maj.update(20);
+    }
+
+    @Override
+    public void mouseClicked(MouseEvent e) {}
+
+    @Override
+    public void mousePressed(MouseEvent e) {}
+
+    @Override
+    public void mouseReleased(MouseEvent e) {}
+
+    @Override
+    public void mouseEntered(MouseEvent e) {}
+
+    @Override
+    public void mouseExited(MouseEvent e) {}
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        throw new UnsupportedOperationException("Unimplemented method 'actionPerformed'");
+    }
+
 }
