@@ -99,7 +99,6 @@ public class GameVue extends JFrame implements ActionListener, MouseListener{
         timer = new Timer(20, new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                System.out.println("actionperformed");
                 update();
             }
         });
