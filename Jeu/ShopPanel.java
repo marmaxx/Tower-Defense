@@ -2,12 +2,7 @@ package Jeu;
 import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-import java.awt.image.BufferedImage;
-import java.awt.image.ImageConsumer;
-import java.io.File;
 import java.io.IOException;
-
-import javax.imageio.ImageIO;
 import javax.swing.*;
 
 public class ShopPanel extends JPanel implements MouseListener{

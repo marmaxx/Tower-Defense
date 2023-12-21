@@ -58,12 +58,14 @@ public class MobsInRangeMortier {
 
         //recuperation des mobs qui sont autour du mob qui va être attaqué
         ArrayList<Mobs> inAttaqueZone = mobsInRangeMobsAttaque(aAttaquer);
-        //attaque le mob avec le plus de pv
-        mortier.attaque(aAttaquer);
-        //attaque les mobs qui sont autour pour reproduire les degats de zone du mortier
-        for(Mobs m : inAttaqueZone){
-            if (!m.equals(aAttaquer)){
-                mortier.attaqueZone(m);
+        if(aAttaquer != null){
+            //attaque le mob avec le plus de pv
+             mortier.attaque(aAttaquer);
+            //attaque les mobs qui sont autour pour reproduire les degats de zone du mortier
+            for(Mobs m : inAttaqueZone){
+                if (!m.equals(aAttaquer)){
+                    mortier.attaqueZone(m);
+                }
             }
         }
     }

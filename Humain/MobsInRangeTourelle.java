@@ -33,9 +33,12 @@ public class MobsInRangeTourelle implements MobsInRange{
     public void attaque(){
         ArrayList<Mobs> inRange = mobsInrange();
         int nb = inRange.size();
-        Random rand = new Random();
-        int posInListe = rand.nextInt(nb);
-        tourelle.attaque(inRange.get(posInListe));
+        System.out.println(nb);
+        if (nb != 0 ){
+            Random rand = new Random();
+            int posInListe = rand.nextInt(nb);
+            tourelle.attaque(inRange.get(posInListe));
+        }
     }
 
 }

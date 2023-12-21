@@ -5,6 +5,10 @@ import java.util.List;
 
 import Géométrie.Direction;
 import Humain.Humain;
+import Humain.MobsInRangeMortier;
+import Humain.MobsInRangeTourelle;
+import Humain.Mortier;
+import Humain.Tourelle;
 import Map.Cellule;
 import Map.Map;
 import Mobs.Mobs;
@@ -73,17 +77,20 @@ public class MajMap {
     }
 
     public void update(long deltaT){
-        LinkedList<Humain> delete = new LinkedList<>();
+        LinkedList<Humain> deleteTour = new LinkedList<>();
+        LinkedList<Mobs> deleteMobs = new LinkedList<>();
+
         for(Humain h : TourSurLaMap.getInstance().getTourSurLaMap()){
-            if(h.estMort()){
-                delete.add(h);
-            }
+            if(h.estMort()){ deleteTour.add(h);}
+            attaqueLesMobs(h);
         }
-        TourSurLaMap.getInstance().getTourSurLaMap().removeAll(delete);
+        TourSurLaMap.getInstance().getTourSurLaMap().removeAll(deleteTour);
 
         for (Mobs mob : MobsSurLaMap.getInstance().getMobsSurLaMap()){
+            if(mob.estMort()){deleteMobs.add(mob);}
             mouvement(mapBase, mob, deltaT);
         }
+        MobsSurLaMap.getInstance().getMobsSurLaMap().removeAll(deleteMobs);
         miseAJourMap();
     }
 
@@ -108,6 +115,16 @@ public class MajMap {
                     }
                 }
             }
+        }
+    }
+
+    public void attaqueLesMobs(Humain h){
+        if(h instanceof Tourelle){
+            MobsInRangeTourelle range = new MobsInRangeTourelle((Tourelle) h);
+            range.attaque();
+        } else if(h instanceof Mortier){
+            MobsInRangeMortier range = new MobsInRangeMortier((Mortier) h);
+            range.attaque();
         }
     }
 }
