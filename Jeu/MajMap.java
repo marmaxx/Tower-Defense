@@ -90,14 +90,14 @@ public class MajMap {
     }
 
     public void update(long deltaT){
-        LinkedList<Humain> deleteTour = new LinkedList<>();
+        //LinkedList<Humain> deleteTour = new LinkedList<>();
         LinkedList<Mobs> deleteMobs = new LinkedList<>();
 
-        for(Humain h : TourSurLaMap.getInstance().getTourSurLaMap()){
-            if(h.estMort()){ deleteTour.add(h);}
-            attaqueLesMobs(h);
-        }
-        TourSurLaMap.getInstance().getTourSurLaMap().removeAll(deleteTour);
+        // for(Humain h : TourSurLaMap.getInstance().getTourSurLaMap()){
+        //     if(h.estMort()){ deleteTour.add(h);}
+        //     attaqueLesMobs(h);
+        // }
+        // TourSurLaMap.getInstance().getTourSurLaMap().removeAll(deleteTour);
 
         for (Mobs mob : MobsSurLaMap.getInstance().getMobsSurLaMap()){
             if(mob.estMort()){deleteMobs.add(mob);}

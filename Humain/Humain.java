@@ -4,15 +4,13 @@ import Géométrie.Coordonnees;
 
 
 public abstract class Humain{
-    private int pv, vitesse, degats, vitesseAttaque, cout;
+    private int vitesse, degats, vitesseAttaque, cout;
     private String type;
     private int range;
     private Coordonnees pos;
 
 
-    Humain(int pv, int vitesse, int degats, String type,int vitesseAttaque, int cout, int range,Coordonnees c){
-        this.pv = pv; 
-        this.vitesse = vitesse; 
+    Humain(int degats, String type,int vitesseAttaque, int cout, int range,Coordonnees c){
         this.degats = degats;
         this.type = type;
         this.vitesseAttaque = vitesseAttaque;
@@ -21,7 +19,7 @@ public abstract class Humain{
         this.pos = c;
     }
 
-    public int getPv(){ return this.pv;}
+    //public int getPv(){ return this.pv;}
 
     public String getType(){ return this.type;}
     
@@ -31,18 +29,18 @@ public abstract class Humain{
     
     public int getVitesseAttaque(){ return this.vitesseAttaque;}
     
-    public void setPv (int i){ this.pv-=i;}
+    //public void setPv (int i){ this.pv-=i;}
 
     public int getCout(){ return this.cout;}
 
     abstract void attaque(Mobs m);
 
-    public void perdPv(int i){
-        if (this.pv <= i ){ this.pv = 0;} 
-        else { this.setPv(i);}
-    }
+    // public void perdPv(int i){
+    //     if (this.pv <= i ){ this.pv = 0;} 
+    //     else { this.setPv(i);}
+    // }
 
-    public boolean estMort(){ return this.pv ==0;}
+    //public boolean estMort(){ return this.pv ==0;}
 
     public Coordonnees getPos(){
         return this.pos; 

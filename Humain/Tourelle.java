@@ -5,8 +5,8 @@ import Mobs.Mobs;
 public class Tourelle extends Humain{
     private MobsInRangeTourelle cible = new MobsInRangeTourelle(this);
 
-    public Tourelle(int pv, int degats, int vitesse, int vitesseAttaque,Coordonnees c){
-        super(pv, vitesse, degats, "T", vitesseAttaque,10,3,c);
+    public Tourelle(Coordonnees c){
+        super(5, "T", 3,10,3,c);
     }
 
     @Override

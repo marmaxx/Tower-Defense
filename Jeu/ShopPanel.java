@@ -3,18 +3,35 @@ import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.io.IOException;
+import java.util.ArrayList;
+
 import javax.swing.*;
+
+import Géométrie.Coordonnees;
+import Humain.Barriere;
+import Humain.Humain;
+import Humain.Mortier;
+import Humain.Tourelle;
+import Map.Cellule;
 
 public class ShopPanel extends JPanel implements MouseListener{
 
     private JPanel info = new JPanel(); 
     private JPanel shop = new JPanel();
     private JPanel settings = new JPanel();
-    private JButton tower1 = new JButton("100$"); 
-    private JButton tower2 = new JButton("300$");
-    private JButton tower3 = new JButton("150$"); 
+    private  JButton tower1 = new JButton("100$"); 
+    private  JButton tower2 = new JButton("300$");
+    private  JButton tower3 = new JButton("150$"); 
     private JButton buy = new JButton("Buy"); 
     //private JButton menu = new JButton();
+
+    // private Tourelle tourelle = new Tourelle(null);
+    // private Mortier mortier  = new Mortier(null);
+    // private Barriere barriere = new Barriere(null);
+
+    ArrayList<Humain> listachat = new ArrayList<>();
+    private int xcelluleAchat = 0;
+    private int ycelluleAchat = 0;
 
     public ShopPanel() throws IOException{
         Dimension tailleMoniteur = Toolkit.getDefaultToolkit().getScreenSize();
@@ -36,6 +53,14 @@ public class ShopPanel extends JPanel implements MouseListener{
             label1.setIcon(image1);
             towerPanel1.setLayout(new BorderLayout());
             towerPanel1.add(label1, BorderLayout.CENTER);
+            tower1.setEnabled(false);
+            tower1.addActionListener(event -> 
+            { 
+                System.out.println(xcelluleAchat);
+                listachat.add(new Tourelle(new Coordonnees(xcelluleAchat, ycelluleAchat)));
+                tower1.setEnabled(false);
+                buy.setEnabled(true);
+            });
             towerPanel1.add(tower1,BorderLayout.SOUTH);
 
             // Case pour le mortier
@@ -45,6 +70,14 @@ public class ShopPanel extends JPanel implements MouseListener{
             label2.setIcon(image2);
             towerPanel2.setLayout(new BorderLayout());
             towerPanel2.add(label2, BorderLayout.CENTER);
+            tower2.setEnabled(false);
+            tower2.addActionListener(event -> 
+            { 
+                listachat.add(new Mortier(new Coordonnees(xcelluleAchat, ycelluleAchat)));
+                System.out.println("true");
+                tower2.setEnabled(false);
+                buy.setEnabled(true);
+            });
             towerPanel2.add(tower2, BorderLayout.SOUTH);
 
             // Case pour la barrière
@@ -54,9 +87,29 @@ public class ShopPanel extends JPanel implements MouseListener{
             label3.setIcon(image3);
             towerPanel3.setLayout(new BorderLayout());
             towerPanel3.add(label3, BorderLayout.CENTER);
+            tower3.setEnabled(false);
+            tower3.addActionListener(event -> 
+            { 
+                listachat.add(new Barriere(new Coordonnees(xcelluleAchat, ycelluleAchat)));
+                tower3.setEnabled(false);
+                buy.setEnabled(true);
+            });
             towerPanel3.add(tower3, BorderLayout.SOUTH);
 
-        
+            //case pour buy
+            buy.setEnabled(false);
+            buy.addActionListener(event -> 
+            {
+                System.out.println("true");
+                GameVue.getmaj().poseTower(listachat.get(0));
+                Game.setArgent(listachat.get(0).getCout());
+                System.out.println(Game.getargent());
+                listachat.clear();
+                buy.setEnabled(false);
+            });
+
+
+
         // shop.add(tower1);
         shop.add(towerPanel1);
         shop.add(towerPanel2);
@@ -71,6 +124,21 @@ public class ShopPanel extends JPanel implements MouseListener{
         this.add(info);
         this.add(shop);
         this.add(settings); 
+    }
+
+    public void updateButton(Cellule c , int x, int y){
+        this.xcelluleAchat = x;
+        this.ycelluleAchat = y;
+        switch (c.getContenu()){
+            case TERRE : tower3.setEnabled(false);
+                        if (Game.haveMoney(100)){tower1.setEnabled(true);}
+                        else if (Game.haveMoney(300)){tower2.setEnabled(true);} break;
+
+            case SABLE : tower1.setEnabled(false); tower2.setEnabled(false);
+                        if(Game.haveMoney(150)){tower3.setEnabled(true);} break;
+
+            default : break;
+        }
     }
 
     @Override

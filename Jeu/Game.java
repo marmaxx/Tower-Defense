@@ -37,14 +37,25 @@ public class Game implements KeyListener{
        score = s; 
     } 
 
-    public void setArgent(int a){
-        argent = a;
+    public static void setArgent(int argents){
+        argent = argents;
+    }
+    public static int getargent(){
+        return argent;
     }
 
     public static int getVieBase(){ return vieBase;}
 
     public static void setVieBase(int v){
         vieBase = v;
+    }
+    
+    public static boolean haveMoney(int i){
+           //System.out.println("true");
+        if(argent >= i){
+            return true;
+        }
+        return false;
     }
 
     @Override

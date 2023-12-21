@@ -3,19 +3,16 @@ import Jeu.MobsSurLaMap;
 import Mobs.Mobs;
 
 public class Map {
-    private Cellule [][] map;
+    private static  Cellule [][] map;
+    //private static final Map Instance = new Map();
 
-    public int getHauteur(){
-        return map.length;
-    }
+    //public Map getinstance(){ return Instance;}
+    public int getHauteur(){ return map.length;}
     
-    public int getLargeur(){
-        return map[1].length;
-    }
+    public int getLargeur(){ return map[1].length; }
 
-    public Cellule[][] getMap(){
-        return map;
-    }
+    public static Cellule[][] getMapS(){ return map;}
+    public Cellule[][] getMap(){ return map;}
 
     public void contourMap(Cellule[][] cell){
         for (int i = 0; i < cell.length; i++){
