@@ -1,18 +1,24 @@
 package Humain;
 import Mobs.Mobs;
+import Géométrie.Coordonnees;
+
+
 public abstract class Humain{
     private int pv, vitesse, degats, vitesseAttaque, cout;
     private String type;
-    int range;
+    private int range;
+    private Coordonnees pos;
 
-    Humain(int pv, int vitesse, int degats, String type,int vitesseAttaque, int cout){
+
+    Humain(int pv, int vitesse, int degats, String type,int vitesseAttaque, int cout, int range,Coordonnees c){
         this.pv = pv; 
         this.vitesse = vitesse; 
         this.degats = degats;
         this.type = type;
         this.vitesseAttaque = vitesseAttaque;
         this.cout = cout;
-        this.range = 3;
+        this.range = range;
+        this.pos = c;
     }
 
     public int getPv(){ return this.pv;}
@@ -35,6 +41,14 @@ public abstract class Humain{
     }
 
     public boolean estMort(){ return this.pv ==0;}
+
+    public Coordonnees getPos(){
+        return this.pos; 
+    }
+
+    public int getRange(){
+        return this.range;
+    }
 
 
 }

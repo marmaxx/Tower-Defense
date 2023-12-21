@@ -11,7 +11,8 @@ public class MobsSurLaMap {
 
     public MobsSurLaMap (){ mobsSurLaMap = new ArrayList<Mobs>();}
 
-    public ArrayList<Mobs> getMobsSurLaMap(){ return mobsSurLaMap;}
+    public ArrayList<Mobs> getMobsSurLaMap(){ return this.mobsSurLaMap;}
+
 
     public void ajoutMob (Mobs mob){ mobsSurLaMap.add(mob);}
 }
