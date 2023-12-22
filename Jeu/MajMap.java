@@ -1,7 +1,5 @@
 package Jeu;
-import java.math.BigDecimal;
-import java.math.RoundingMode;
-import java.awt.event.ActionListener;
+
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.ArrayList;
@@ -9,7 +7,6 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
-
 import Géométrie.Coordonnees;
 import Géométrie.Direction;
 import Humain.Humain;
