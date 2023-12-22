@@ -9,6 +9,9 @@ import Humain.Tourelle;
 import Map.Map;
 import Mobs.Mobs;
 import Mobs.Robot;
+import Mobs.Sprinteur;
+import Mobs.Tank;
+
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -21,6 +24,7 @@ public class GameVue extends JFrame implements ActionListener, MouseListener{
     private JPanel ZoneJeux = new JPanel();
     private static JPanel ZoneJouable = new JPanel();
     private JPanel magasin = new JPanel();
+    private JPanel panel;
     private MajMap maj;
     private Timer timer;
 
@@ -45,7 +49,8 @@ public class GameVue extends JFrame implements ActionListener, MouseListener{
         maj.poseTower(5, 5, new Tourelle(10, 2, 0, 3, new Coordonnees(5, 5)));
 
         new Robot();
-
+        new Tank();
+        new Sprinteur();
 
         // frame
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -78,7 +83,7 @@ public class GameVue extends JFrame implements ActionListener, MouseListener{
         OverlayLayout overlayout = new OverlayLayout(ZoneJouable);
         ZoneJouable.setLayout(overlayout);
         for (Mobs mob : MobsSurLaMap.getInstance().getMobsSurLaMap()) {
-            JPanel panel = new GraphismeMobs(mob);
+            panel = new GraphismeMobs(mob);
             ZoneJouable.add(panel);
         }
         ZoneJouable.add(plateau);
@@ -100,6 +105,7 @@ public class GameVue extends JFrame implements ActionListener, MouseListener{
             @Override
             public void actionPerformed(ActionEvent e) {
                 update();
+                repaint();
             }
         });
         timer.start();
@@ -107,15 +113,11 @@ public class GameVue extends JFrame implements ActionListener, MouseListener{
 
     public void startGame(){
         game.start();
-        timer.start();
-    }
-
-    public void start (){
-
+        //timer.start();
     }
 
     public void update (){
-        maj.update(20);
+        maj.update(1);
     }
 
     @Override

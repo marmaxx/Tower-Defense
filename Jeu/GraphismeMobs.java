@@ -45,4 +45,8 @@ public class GraphismeMobs extends JPanel{
         double sizecase = largeur/9;
         return Math.floor(mob.getPos().getY() * sizecase);
     }
+
+    public void updateGraphismeMobs(){
+        new GraphismeMobs(mob);
+    }
 }

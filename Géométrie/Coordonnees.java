@@ -20,6 +20,10 @@ public record Coordonnees (double x, double y) {
         return new Coordonnees(x + other.x, y + other.y);
     }
 
+    public Coordonnees moins(Coordonnees other) {
+        return new Coordonnees(x - other.x, y - other.y);
+    }
+
     public Coordonnees fois(double multiplier) {
         return new Coordonnees(x * multiplier, y * multiplier);
     }

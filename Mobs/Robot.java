@@ -5,7 +5,7 @@ import Humain.Humain;
 public class Robot extends Mobs {
 
     public Robot(){ 
-        super(new Coordonnees(6,1),50,50,1,6,1,"R");
+        super(new Coordonnees(6,1),50,50,2,6,1,"R");
     }
 
     @Override

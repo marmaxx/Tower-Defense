@@ -64,21 +64,21 @@ public abstract class Mobs {
         return this.pv == 0; 
     }
 
-    public Coordonnees nextPos(long deltaTNanoSeconds) {
+    public Coordonnees nextPos(long deltaT) {
         return this.getPos().plus((switch (getDirection()) {
             case NONE -> Coordonnees.ZERO;
             case NORTH -> Coordonnees.HAUT;
             case EAST -> Coordonnees.DROITE;
             case SOUTH -> Coordonnees.BAS;
             case WEST -> Coordonnees.GAUCHE;
-        }).fois(getVitesse() * deltaTNanoSeconds * 1E-9));
+        }).fois(getVitesse() * deltaT * 10E-3));
     }
 
     public boolean isSandInFront(Direction dir, Map m){
         boolean b = false;
-        int x = (int)Math.abs(getPos().getX());
-        int y = (int)Math.abs(getPos().getY());
-        //System.out.println("x = "+x+" y = "+y);
+        int x = (int)Math.floor(getPos().getX());
+        int y = (int)Math.floor(getPos().getY());
+        System.out.println("x = "+x+" y = "+y);
         switch(dir){
             case NORTH: if(m.getMap()[x-1][y].getContenu()==Cellule.Contenu.SABLE){ b = true;} break;
             case EAST: if(m.getMap()[x][y+1].getContenu()==Cellule.Contenu.SABLE){ b = true;} break;
@@ -94,11 +94,16 @@ public abstract class Mobs {
     }
 
     public boolean estAuMilieu(){
-        if (getPos().getX() <= getPos().round().x() + 0.1 && getPos().getX() >= getPos().round().x() - 0.1
-                && getPos().getY() <= getPos().round().y() + 0.1 && getPos().getY() >= getPos().round().y() - 0.1) {
+        // if (getPos().getX() <= getPos().round().x() + 0.1 && getPos().getX() >= getPos().round().x() - 0.1
+        //         && getPos().getY() <= getPos().round().y() + 0.1 && getPos().getY() >= getPos().round().y() - 0.1) {
+        //             System.out.println("x :"+getPos().round().x());
+        //     return true;
+        // } else {
+        //     return false;
+        // }
+        if (getPos().getX()==Math.floor(getPos().getX()) && getPos().getY()==Math.floor(getPos().getY())){
             return true;
-        } else {
-            return false;
         }
+        return false;
     }
 }

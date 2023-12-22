@@ -4,6 +4,7 @@ import java.awt.event.KeyListener;
 
 public class Game implements KeyListener{
     private int score, argent, vieBase;
+
     public static void main (String [] args){
         new Game();
     }
@@ -14,7 +15,6 @@ public class Game implements KeyListener{
     
     public Game(){
         this.gameVue = new GameVue(this);
-        //gameVue.startGame();
     }
 
     public void start(){
