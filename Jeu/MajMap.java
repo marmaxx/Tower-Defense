@@ -1,8 +1,6 @@
 package Jeu;
-import java.awt.event.ActionListener;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
-import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
@@ -16,24 +14,17 @@ import Humain.MobsInRangeMortier;
 import Humain.MobsInRangeTourelle;
 import Humain.Mortier;
 import Humain.Tourelle;
-import Map.Cellule;
 import Map.Map;
 import Mobs.Mobs;
-import Mobs.Robot;
 
 public class MajMap {
     private Map mapBase;
-    private final int hauteur;
-    private final int largeur;
-    private final String name;
-    private LinkedList<Cellule> towerList;
+    //private final String name;
     private Coordonnees arrivee = new Coordonnees(6, 7);
     
     public MajMap (Map mapBase, String name){
         this.mapBase = mapBase; 
-        this.hauteur = mapBase.getHauteur();
-        this.largeur = mapBase.getLargeur();
-        this.name = name;
+        //this.name = name;
     }
 
     public Map getMapBase(){
@@ -63,13 +54,6 @@ public class MajMap {
             //System.out.println("pos: "+mob.getPos());
             //System.out.println("nextpos: "+nextPos);
             if (!mob.isSandInFront(mob.getDirection(), m)){
-                System.out.println(mob.getType()+" ICI");
-                // if (mob instanceof Robot){ 
-                //     int x = (int)Math.floor(mob.getPos().getX());
-                //     int y = (int)Math.floor(mob.getPos().getY());
-                //     System.out.println("x = "+x+" y = "+y);
-                // }
-                
                 ArrayList<Direction> dirPossible = new ArrayList<>();
                 for (Direction dir : List.of(Direction.NORTH, Direction.EAST, Direction.SOUTH, Direction.WEST)){
                     dirPossible.add(dir);
@@ -88,7 +72,6 @@ public class MajMap {
                     }
                 }
             }
-            //mob.setPos(nextPos.warp(largeur,hauteur));
         }
         mob.setDirection(mob.getDirection());
         //System.out.println(mob.getDirection()); 
@@ -104,15 +87,6 @@ public class MajMap {
         double yArrondi2 = yArrondi1.doubleValue();
 
         mob.setPos(new Coordonnees(xArrondi2,yArrondi2));
-        // switch (mob.getType()) {
-        //     case "R": System.out.println("ROBOT: "+mob.getPos()+" --> "+nextPos); break;
-        //     case "Ta": System.out.println("TANK: "+mob.getPos()+" --> "+nextPos); break;
-        //     case "S": System.out.println("SPRINT: "+mob.getPos()+" --> "+nextPos); break;
-        //     default:
-        //         break;
-        // }
-        // System.out.println("x="+((mob.getPos().getX())*1000)%10);
-        // System.out.println("y="+mob.getPos().getY() *1000%10);
     }
 
     public void update(long deltaT){

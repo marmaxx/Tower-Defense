@@ -1,5 +1,4 @@
 import Géométrie.Coordonnees;
-import Humain.Mortier;
 import Humain.Tourelle;
 import Jeu.MajMap;
 import Map.Map;

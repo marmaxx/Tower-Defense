@@ -44,7 +44,8 @@ public abstract class Mobs {
     public void setDirection(Direction dir){ this.dir = dir;}
 
     public int getPv(){ return this.pv;}
-    public void setPv(int i){ this.pv -= i;};
+    public int getPvActuel(){ return this.pvActuel;}
+    public void setPvActuel(int i){ this.pvActuel -= i;};
 
     public int getVitesse(){return this.vitesse;}
 
@@ -58,7 +59,7 @@ public abstract class Mobs {
 
     public void perdPv(int i){
         if (this.pv <= i ){ this.pv = 0;} 
-        else { this.setPv(i);}
+        else { this.setPvActuel(i);}
     }
     public boolean estMort(){
         return this.pv == 0; 

@@ -14,7 +14,7 @@ public class ShopPanel extends JPanel implements MouseListener{
     private JButton tower2 = new JButton("300$");
     private JButton tower3 = new JButton("150$"); 
     private JButton buy = new JButton("Buy"); 
-    private JButton menu = new JButton();
+    //private JButton menu = new JButton();
 
     public ShopPanel() throws IOException{
         Dimension tailleMoniteur = Toolkit.getDefaultToolkit().getScreenSize();

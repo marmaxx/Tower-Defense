@@ -2,9 +2,6 @@ package Jeu;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
-import javax.swing.border.Border;
-import javax.swing.border.LineBorder;
-
 import Géométrie.Coordonnees;
 import Humain.Tourelle;
 import Map.Map;
@@ -21,15 +18,7 @@ import java.awt.event.MouseListener;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.HashMap;
-
-import Géométrie.Coordonnees;
 import Humain.Humain;
-import Humain.Tourelle;
-import Map.Map;
-import Mobs.Mobs;
-import Mobs.Robot;
-
 
 public class GameVue extends JFrame implements ActionListener, MouseListener{
     private Game game;
@@ -37,7 +26,6 @@ public class GameVue extends JFrame implements ActionListener, MouseListener{
     private JPanel ZoneJeux = new JPanel();
     private static JPanel ZoneJouable = new JPanel();
     private JPanel magasin = new JPanel();
-    private JPanel panel;
     private MajMap maj;
     private Timer timer;
     private static JPanel plateau = new JPanel(new GridLayout(8,9));
