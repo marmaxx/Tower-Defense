@@ -4,13 +4,9 @@ import java.awt.event.KeyListener;
 import java.io.IOException;
 
 public class Game implements KeyListener{
-    private static int score, argent;
+    private int score;
+    private static int argent = 150;
     private static int vieBase = 3;
-
-    public Game (int s, int a, int v){
-        score=s; argent=a; vieBase=v;
-    }
-
     public static void main (String [] args) throws IOException{
         new Game();
     }

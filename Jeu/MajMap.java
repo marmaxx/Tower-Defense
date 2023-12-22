@@ -1,6 +1,10 @@
 package Jeu;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
+import java.awt.event.ActionListener;
+import java.math.BigDecimal;
+import java.math.RoundingMode;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
@@ -16,10 +20,12 @@ import Humain.Mortier;
 import Humain.Tourelle;
 import Map.Map;
 import Mobs.Mobs;
+import Mobs.Robot;
 
 public class MajMap {
-    private Map mapBase;
+    private static Map mapBase;
     //private final String name;
+
     private Coordonnees arrivee = new Coordonnees(6, 7);
     
     public MajMap (Map mapBase, String name){
@@ -151,6 +157,7 @@ public class MajMap {
             MobsInRangeMortier range = new MobsInRangeMortier((Mortier) h);
             range.attaque();
         }
+   
     }
 
     public Direction dirInverse (Direction dir){
