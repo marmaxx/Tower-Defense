@@ -4,7 +4,6 @@ import java.math.RoundingMode;
 import java.awt.event.ActionListener;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
-import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
@@ -20,12 +19,10 @@ import Humain.Mortier;
 import Humain.Tourelle;
 import Map.Map;
 import Mobs.Mobs;
-import Mobs.Robot;
 
 public class MajMap {
-    private static Map mapBase;
+    private Map mapBase;
     //private final String name;
-
     private Coordonnees arrivee = new Coordonnees(6, 7);
     
     public MajMap (Map mapBase, String name){
