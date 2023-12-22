@@ -22,8 +22,12 @@ public class Map {
             for (int j = 0; j < cell[0].length; j++){
                 if (i==0){ cell[i][j] = new Cellule(Cellule.Contenu.ARBRE,false);}
                 if (i < cell.length-1 && j == 0 || i < cell.length-1 && j == cell[0].length-1){ cell[i][j] =  new Cellule(Cellule.Contenu.ARBRE,false);}
-                if (i == cell.length-1 && j < 3){ cell[i][j] =  new Cellule(Cellule.Contenu.BASE_IA,false);}
-                if (i == cell.length-1 && j > cell[0].length-4){ cell[i][j] =  new Cellule(Cellule.Contenu.BASE_HUMAIN,false);}
+                cell[cell.length-1][0] = new Cellule(Cellule.Contenu.BASE_IA1, false);
+                cell[cell.length-1][1] = new Cellule(Cellule.Contenu.BASE_IA2, false);
+                cell[cell.length-1][2] = new Cellule(Cellule.Contenu.BASE_IA3, false);
+                cell[cell.length-1][6] =  new Cellule(Cellule.Contenu.BASE_HUMAIN1,false);
+                cell[cell.length-1][7] =  new Cellule(Cellule.Contenu.BASE_HUMAIN2,false);
+                cell[cell.length-1][8] =  new Cellule(Cellule.Contenu.BASE_HUMAIN3,false);
                 if (i == cell.length-1 && j >= 3 && j<= cell[0].length-4){ cell[i][j] =  new Cellule(Cellule.Contenu.ARBRE,false);}
             }
         }
@@ -83,8 +87,12 @@ public class Map {
             case SABLE:  System.out.print("   "); break;
             case TERRE:  System.out.print(ANSI_WHITE + " ? " + ANSI_RESET);; break;
             case EAU :  System.out.print(ANSI_BLUE + " ≈ " + ANSI_RESET);; break;
-            case BASE_IA:  System.out.print(ANSI_RED + " - " + ANSI_RESET);; break;    
-            case BASE_HUMAIN:  System.out.print(ANSI_GREY + " - " + ANSI_RESET);; break;
+            case BASE_IA1:  System.out.print(ANSI_RED + " - " + ANSI_RESET);; break;
+            case BASE_IA2:  System.out.print(ANSI_RED + " - " + ANSI_RESET);; break;    
+            case BASE_IA3:  System.out.print(ANSI_RED + " - " + ANSI_RESET);; break;    
+            case BASE_HUMAIN1:  System.out.print(ANSI_GREY + " - " + ANSI_RESET);; break;
+            case BASE_HUMAIN2:  System.out.print(ANSI_GREY + " - " + ANSI_RESET);; break;
+            case BASE_HUMAIN3:  System.out.print(ANSI_GREY + " - " + ANSI_RESET);; break;
             default:break; 
         }
     }
@@ -106,8 +114,12 @@ public class Map {
                             System.out.print(" T ");
                         } break;
                         case EAU: printColored(Cellule.Contenu.EAU); break;
-                        case BASE_IA: printColored(Cellule.Contenu.BASE_IA); break;
-                        case BASE_HUMAIN: printColored(Cellule.Contenu.BASE_HUMAIN); break;
+                        case BASE_IA1: printColored(Cellule.Contenu.BASE_IA1); break;
+                        case BASE_IA2: printColored(Cellule.Contenu.BASE_IA2); break;
+                        case BASE_IA3: printColored(Cellule.Contenu.BASE_IA3); break;
+                        case BASE_HUMAIN1: printColored(Cellule.Contenu.BASE_HUMAIN1); break;
+                        case BASE_HUMAIN2: printColored(Cellule.Contenu.BASE_HUMAIN1); break;
+                        case BASE_HUMAIN3: printColored(Cellule.Contenu.BASE_HUMAIN1); break;
                         case NOMBRE: System.out.print(mobsDansCase(i,j)); break;
                         case MOB: System.out.print(afficheMob(i,j)); break;
                         default: break;
@@ -136,33 +148,6 @@ public class Map {
         }
         return " "+nombre+" ";
     }
-
-    // public void miseAJourMap(){
-    //     if (MobsSurLaMap.getMobsSurLaMap().size() > 0){
-    //         ArrayList<Mobs> mobsDansCase = new ArrayList<>();
-    //         for (int i = 0; i < map.length; i++){
-    //             for (int j = 0; j < map[0].length; j++){
-    //                 for (Mobs mob : MobsSurLaMap.getMobsSurLaMap()){
-                        
-    //                     if (mob.estDansCase(i,j)){
-    //                         mobsDansCase.add(mob);System.out.println(mob.getPos());
-    //                     }
-    //                 }
-    //                 if (mobsDansCase.size() == 1){ 
-    //                     map[i][j] = new Cellule(Cellule.Contenu.MOB,false); 
-    //                     mobsDansCase.clear();
-    //                 }
-    //                 if (mobsDansCase.size() > 1){ 
-    //                     map[i][j] = new Cellule(Cellule.Contenu.NOMBRE,false); 
-    //                     mobsDansCase.clear();
-    //                 }
-    //             }
-    //         }
-    //     }
-    // }
-
-
-
 
     public void rangeTower(){
         for(int i = 0; i<map.length; i++){

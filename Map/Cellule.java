@@ -5,7 +5,7 @@ import Humain.Humain;
 import Mobs.Mobs;
 
 public class Cellule {
-    public enum Contenu { SABLE, EAU, TERRE, ARBRE, BASE_IA, BASE_HUMAIN, NOMBRE, MOB};
+    public enum Contenu { SABLE, EAU, TERRE, ARBRE, BASE_IA1, BASE_IA2, BASE_IA3, BASE_HUMAIN1, BASE_HUMAIN2, BASE_HUMAIN3, NOMBRE, MOB};
 
     private  Mobs  mobs = null; 
     private boolean disponible;

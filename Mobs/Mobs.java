@@ -76,11 +76,11 @@ public abstract class Mobs {
 
     public boolean isSandInFront(Direction dir, Map m){
         boolean b = false;
-        int x = (int)Math.floor(getPos().getX());
-        int y = (int)Math.floor(getPos().getY());
+        int x = (int)Math.floor(getPos().getX()); // 5
+        int y = (int)Math.floor(getPos().getY()); // 1
         System.out.println("x = "+x+" y = "+y);
         switch(dir){
-            case NORTH: if(m.getMap()[x-1][y].getContenu()==Cellule.Contenu.SABLE){ b = true;} break;
+            case NORTH: System.out.println("au nord"); System.out.println(m.getMap()[x-1][y].getContenu()); if(m.getMap()[x-1][y].getContenu()==Cellule.Contenu.SABLE){ b = true;} break;
             case EAST: if(m.getMap()[x][y+1].getContenu()==Cellule.Contenu.SABLE){ b = true;} break;
             case SOUTH: if(m.getMap()[x+1][y].getContenu()==Cellule.Contenu.SABLE){ b = true;} break; 
             case WEST: if(m.getMap()[x][y-1].getContenu()==Cellule.Contenu.SABLE){ b = true;} break;

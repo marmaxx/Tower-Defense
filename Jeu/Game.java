@@ -4,7 +4,13 @@ import java.awt.event.KeyListener;
 import java.io.IOException;
 
 public class Game implements KeyListener{
-    private int score, argent, vieBase;
+    private static int score, argent;
+    private static int vieBase = 3;
+
+    public Game (int s, int a, int v){
+        score=s; argent=a; vieBase=v;
+    }
+
     public static void main (String [] args) throws IOException{
         new Game();
     }
@@ -27,16 +33,18 @@ public class Game implements KeyListener{
         MobsSurLaMap.getInstance().reset();
     }
 
-    public void setScore(int score){
-       this.score = score; 
+    public void setScore(int s){
+       score = s; 
     } 
 
-    public void setArgent(int argent){
-        this.argent = argent;
+    public void setArgent(int a){
+        argent = a;
     }
 
-    public void setVieBase(int vieBase){
-        this.vieBase = vieBase;
+    public static int getVieBase(){ return vieBase;}
+
+    public static void setVieBase(int v){
+        vieBase = v;
     }
 
     @Override

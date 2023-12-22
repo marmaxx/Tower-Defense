@@ -69,13 +69,15 @@ public class MajMap {
                 //     int y = (int)Math.floor(mob.getPos().getY());
                 //     System.out.println("x = "+x+" y = "+y);
                 // }
-                mob.setDirection(Direction.NONE);
+                
                 ArrayList<Direction> dirPossible = new ArrayList<>();
                 for (Direction dir : List.of(Direction.NORTH, Direction.EAST, Direction.SOUTH, Direction.WEST)){
                     dirPossible.add(dir);
                 }
                 dirPossible.remove(mob.getDirection());
                 dirPossible.remove(dirInverse(mob.getDirection()));
+                System.out.println(dirPossible);
+                mob.setDirection(Direction.NONE);
                 for (Direction dir : dirPossible){
                     switch(dir){
                         case NORTH: if (mob.isSandInFront(dir,m)){ mob.setDirection(dir);} break;
@@ -133,10 +135,11 @@ public class MajMap {
                             MobsSurLaMap.getInstance().getMobsSurLaMap().remove(mob);
                             System.out.println("did it!");
                             System.out.println(MobsSurLaMap.getInstance().getMobsSurLaMap());
+                            Game.setVieBase(Game.getVieBase()-1);
                         }
                     };
                 Timer timer = new Timer();
-                timer.schedule(timerTask, 1000);
+                timer.schedule(timerTask, 0);
             }
         }
         MobsSurLaMap.getInstance().getMobsSurLaMap().removeAll(deleteMobs);
@@ -155,11 +158,11 @@ public class MajMap {
                         }
                     }
                     if (mobsDansCase.size() == 1){ 
-                        mapBase.getMap()[i][j] = new Cellule(Cellule.Contenu.MOB,false); 
+                        //mapBase.getMap()[i][j] = new Cellule(Cellule.Contenu.MOB,false); 
                         mobsDansCase.clear();
                     }
                     if (mobsDansCase.size() > 1){ 
-                        mapBase.getMap()[i][j] = new Cellule(Cellule.Contenu.NOMBRE,false); 
+                        //mapBase.getMap()[i][j] = new Cellule(Cellule.Contenu.NOMBRE,false); 
                         mobsDansCase.clear();
                     }
                 }
