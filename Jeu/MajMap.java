@@ -12,6 +12,10 @@ import java.util.TimerTask;
 import Géométrie.Coordonnees;
 import Géométrie.Direction;
 import Humain.Humain;
+import Humain.MobsInRangeMortier;
+import Humain.MobsInRangeTourelle;
+import Humain.Mortier;
+import Humain.Tourelle;
 import Map.Cellule;
 import Map.Map;
 import Mobs.Mobs;
@@ -30,15 +34,15 @@ public class MajMap {
         this.hauteur = mapBase.getHauteur();
         this.largeur = mapBase.getLargeur();
         this.name = name;
-        this.towerList = new LinkedList<>();
     }
 
     public Map getMapBase(){
         return mapBase;
     }
 
-    public void poseTower(int x ,int y, Humain tower){
-
+    public void poseTower(Humain tower){
+        int x = (int) tower.getPos().getX();
+        int y = (int) tower.getPos().getY();
         try {
             mapBase.getMap()[x][y].getDispo();
         }
@@ -48,8 +52,7 @@ public class MajMap {
         finally {
             if (mapBase.getMap()[x][y].getDispo()){
             mapBase.getMap()[x][y].setDisponible(false);
-            mapBase.getMap()[x][y].setHumain(tower);
-            towerList.add(mapBase.getMap()[x][y]);
+            TourSurLaMap.getInstance().getTourSurLaMap().add(tower);
             } else { System.out.println("Case non disponible");}
         }
     }
@@ -111,15 +114,17 @@ public class MajMap {
     }
 
     public void update(long deltaT){
-        LinkedList<Cellule> delete = new LinkedList<>();
-        for(Cellule c : towerList){
-            if(c.getHumain().estMort()){
-                delete.add(c);
-                c.setHumain(null);
-            }
+        LinkedList<Humain> deleteTour = new LinkedList<>();
+        LinkedList<Mobs> deleteMobs = new LinkedList<>();
+
+        for(Humain h : TourSurLaMap.getInstance().getTourSurLaMap()){
+            if(h.estMort()){ deleteTour.add(h);}
+            attaqueLesMobs(h);
         }
-        towerList.removeAll(delete);
+        TourSurLaMap.getInstance().getTourSurLaMap().removeAll(deleteTour);
+
         for (Mobs mob : MobsSurLaMap.getInstance().getMobsSurLaMap()){
+            if(mob.estMort()){deleteMobs.add(mob);}
             mouvement(mapBase, mob, deltaT);
             if (mob.getPos().getX() == arrivee.getX() && mob.getPos().getY() == arrivee.getY()){
                 TimerTask timerTask = new TimerTask(){
@@ -134,6 +139,7 @@ public class MajMap {
                 timer.schedule(timerTask, 1000);
             }
         }
+        MobsSurLaMap.getInstance().getMobsSurLaMap().removeAll(deleteMobs);
         miseAJourMap();
     }
 
@@ -158,6 +164,15 @@ public class MajMap {
                     }
                 }
             }
+        }
+    }
+    public void attaqueLesMobs(Humain h){
+        if(h instanceof Tourelle){
+            MobsInRangeTourelle range = new MobsInRangeTourelle((Tourelle) h);
+            range.attaque();
+        } else if(h instanceof Mortier){
+            MobsInRangeMortier range = new MobsInRangeMortier((Mortier) h);
+            range.attaque();
         }
     }
 
