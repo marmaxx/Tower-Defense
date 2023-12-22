@@ -21,7 +21,7 @@ import Humain.Humain;
 public class GameVue extends JFrame implements ActionListener, MouseListener{
 
     private Game game;
-    private Map map = new Map();
+    private Map map = new Map("map1");
     private JPanel ZoneJeux = new JPanel();
     private static JPanel ZoneJouable = new JPanel();
     private ShopPanel magasin = new ShopPanel();
@@ -48,7 +48,6 @@ public class GameVue extends JFrame implements ActionListener, MouseListener{
     GameVue(Game game) throws IOException {
 
         this.game = game;
-        map.map1();
         maj = new MajMap(map, "map2");
         //maj.poseTower(new Tourelle(new Coordonnees(5, 5)));
 

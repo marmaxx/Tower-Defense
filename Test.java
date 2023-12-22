@@ -7,9 +7,8 @@ import Mobs.Robot;
 public class Test {
 
     public static void main(String [] args){
-        Map m = new Map();
+        Map m = new Map("map1");
         System.out.println("map2 ");
-        m.map2();
 
         MajMap maj = new MajMap(m,"map2");
         Tourelle t = new Tourelle(new Coordonnees(5, 5));

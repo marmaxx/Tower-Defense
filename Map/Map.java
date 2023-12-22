@@ -3,10 +3,16 @@ import Jeu.MobsSurLaMap;
 import Mobs.Mobs;
 
 public class Map {
-    private static  Cellule [][] map;
+    private static  Cellule [][] map = new Cellule[8][9];
     //private static final Map Instance = new Map();
 
     //public Map getinstance(){ return Instance;}
+
+    public Map(String nom){
+        if (nom.equals("map1")) this.map1();
+        else if (nom.equals("map2")) this.map2();
+    }
+    
     public int getHauteur(){ return map.length;}
     
     public int getLargeur(){ return map[1].length; }
