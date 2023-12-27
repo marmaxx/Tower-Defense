@@ -1,7 +1,7 @@
 package Jeu;
 
-import javax.imageio.ImageIO;
 import javax.swing.*;
+import Géométrie.Coordonnees;
 import Map.Map;
 import Mobs.Mobs;
 import Mobs.Robot;
@@ -13,10 +13,10 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import Humain.Humain;
+import Humain.Tourelle;
 
 public class GameVue extends JFrame implements ActionListener, MouseListener{
 
@@ -45,20 +45,26 @@ public class GameVue extends JFrame implements ActionListener, MouseListener{
         return maj;
     }
 
-    GameVue(Game game) throws IOException {
+    public GameVue(Game game) throws IOException {
 
         this.game = game;
         maj = new MajMap(map, "map2");
-        //maj.poseTower(new Tourelle(new Coordonnees(5, 5)));
+        // Humain h = new Tourelle(new Coordonnees(5, 4));
+        // maj.poseTower(h);
 
         new Robot();
         new Tank();
         new Sprinteur();
-
+        // Timer t = new Timer(2000,  new ActionListener() {
+        //     @Override
+        //     public void actionPerformed(ActionEvent e) {
+        //     }
+        // });
+        // t.start();
         // frame
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         Dimension tailleMoniteur = Toolkit.getDefaultToolkit().getScreenSize();
-        this.setTitle("Human vs AI");
+        //this.setTitle("Human vs AI");
         this.setSize((int) tailleMoniteur.getWidth(), (int) tailleMoniteur.getHeight());
 
         //plateau
@@ -76,9 +82,9 @@ public class GameVue extends JFrame implements ActionListener, MouseListener{
                     case EAU: p.setBackground(new Color(18, 101, 189)); break;
                     case SABLE: p.setBackground(new Color(247, 208, 118)); break;
                     case ARBRE: p.setBackground(new Color(10, 84, 13)); break;
-                    case BASE_HUMAIN1: p = new GraphismeBase(1); break;
-                    case BASE_HUMAIN2: p = new GraphismeBase(2); break;
-                    case BASE_HUMAIN3: p = new GraphismeBase(3); break;
+                    case BASE_HUMAIN1: p = new GraphismeBaseHumain(1); break;
+                    case BASE_HUMAIN2: p = new GraphismeBaseHumain(2); break;
+                    case BASE_HUMAIN3: p = new GraphismeBaseHumain(3); break;
                     case BASE_IA1: p = new GraphismeBaseIA(1); break;
                     case BASE_IA2: p = new GraphismeBaseIA(2); break;
                     case BASE_IA3: p = new GraphismeBaseIA(3); break;
@@ -117,11 +123,6 @@ public class GameVue extends JFrame implements ActionListener, MouseListener{
             JPanel panel = new GraphismeTour(tower);
             ZoneJouable.add(panel);
         }
-        for (Humain tower : TourSurLaMap.getInstance().getTourSurLaMap()) {
-            JPanel panel = new GraphismeTour(tower);
-            ZoneJouable.add(panel);
-        }
-
         ZoneJouable.add(plateau);
         
 
@@ -136,16 +137,26 @@ public class GameVue extends JFrame implements ActionListener, MouseListener{
         this.add(ZoneJeux);
         this.add(magasin);
         this.setVisible(true);
-        timer = new Timer(20, new ActionListener() {
+        timer = new Timer(0, new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 updatePane();
                 update();
                 repaint();
-                ZoneJeux.remove(rootPane);
+                //ZoneJeux.remove(rootPane);
             }
         });
         timer.start();
+        //game.add(this);
+    }
+
+    public static void poseTower (Humain h){
+        maj.poseTower(h);
+        for (Humain tower : TourSurLaMap.getInstance().getTourSurLaMap()) {
+            JPanel panel = new GraphismeTour(tower);
+            ZoneJouable.add(panel);
+        }
+        ZoneJouable.add(plateau);
     }
 
     public void startGame(){
@@ -155,7 +166,7 @@ public class GameVue extends JFrame implements ActionListener, MouseListener{
     }
 
     public void update (){
-        maj.update(1);
+        maj.update(1000000);
     }
 
     public void updatePane(){
@@ -190,16 +201,16 @@ public class GameVue extends JFrame implements ActionListener, MouseListener{
         throw new UnsupportedOperationException("Unimplemented method 'actionPerformed'");
     }
 
-    public JPanel paintComponent(Graphics g){
-        JPanel p = new JPanel();
-        try{
-            Image image = ImageIO.read(new File("ressources/base_clean.png"));
-            g.drawImage(image, GameVue.getZoneJouable().getWidth()/9, GameVue.getZoneJouable().getHeight()/8,this);
-        }
-        catch (IOException e){
-            e.printStackTrace();
-        }
-        p.paint(g);
-        return p;
-    }
+    // public JPanel paintComponent(Graphics g){
+    //     JPanel p = new JPanel();
+    //     try{
+    //         Image image = ImageIO.read(new File("ressources/base_clean.png"));
+    //         g.drawImage(image, GameVue.getZoneJouable().getWidth()/9, GameVue.getZoneJouable().getHeight()/8,this);
+    //     }
+    //     catch (IOException e){
+    //         e.printStackTrace();
+    //     }
+    //     p.paint(g);
+    //     return p;
+    // }
 }

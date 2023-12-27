@@ -28,6 +28,10 @@ public record Coordonnees (double x, double y) {
         return new Coordonnees(x * multiplier, y * multiplier);
     }
 
+    public boolean egal(Coordonnees other) {
+        return (this.x == other.x && this.y == other.y);
+    }
+
     public Coordonnees round() {
         return new Coordonnees((int) Math.round(x), (int) Math.round(y));
     }
@@ -46,19 +50,8 @@ public record Coordonnees (double x, double y) {
         return new Coordonnees(rx, ry);
     }
 
-    /*public Coordonnees roundFormat() {
-        double x = this.x;
-        double y = this.y;
-
-        DecimalFormat decimalFormat = new DecimalFormat("#.#");
-        String FormatedNumber = decimalFormat.format(x);
-        String formattedX = FormatedNumber.replace(",", ".");
-        double x2 = Double.parseDouble(formattedX);
-
-        String FormatedNumber2 = decimalFormat.format(y);
-        String formattedY = FormatedNumber2.replace(",", ".");
-        double y2 = Double.parseDouble(formattedY);
-
-        return new Coordonnees(x2, y2);
-    }*/
+    public double distanceFrom (Coordonnees other){
+        double d = Math.sqrt(Math.pow(other.x - x, 2)+Math.pow(other.y - y, 2)); 
+        return Math.abs(d);
+    }
 }

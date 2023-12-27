@@ -1,22 +1,79 @@
 package Jeu;
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.GridLayout;
+import java.awt.Toolkit;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.io.IOException;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JMenuBar;
+//import javax.swing.JPanel;
 
-public class Game implements KeyListener{
+public class Game extends JFrame implements KeyListener{
     private int score;
     private static int argent = 150;
     private static int vieBase = 3;
+    //private JPanel nomJeu = new JPanel();
+    private JMenuBar menu = new JMenuBar();
+    private JButton bouttonJouer = new JButton();
+    private JButton bouttonParametres = new JButton();
+    private JButton bouttonQuitter = new JButton();
+    
     public static void main (String [] args) throws IOException{
         new Game();
     }
 
     private GameVue gameVue;
+    private ParametreVue parametreVue = new ParametreVue(this);
+    private ChoixJeuVue choixJeuVue = new ChoixJeuVue(this);
 
     public GameVue getGameVue(){ return this.gameVue;}
     
     public Game() throws IOException{
-        this.gameVue = new GameVue(this);
+        this.parametreVue.setVisible(false);
+        this.choixJeuVue.setVisible(false);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        Dimension tailleMoniteur = Toolkit.getDefaultToolkit().getScreenSize();
+        this.setTitle("Human vs AI");
+        this.setSize((int) tailleMoniteur.getWidth(), (int) tailleMoniteur.getHeight());
+
+        menu.setLayout(new GridLayout(3,1));
+        menu.setBackground(Color.BLACK);
+        menu.add(new JLabel("IA vs HUMAIN"), BorderLayout.CENTER);
+
+        bouttonJouer.setText("JOUER");
+        bouttonJouer.addActionListener((event) -> {
+            try{
+                this.gameVue= new GameVue(this);
+                //this.add(gameVue);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            //new ChoixJeuVue();
+            this.setVisible(false);
+        });
+        menu.add(bouttonJouer);
+        
+        bouttonParametres.setText("PARAMETRES");
+        bouttonParametres.addActionListener((event) -> {
+            this.parametreVue.setVisible(true);
+            this.setVisible(false);
+        });
+        menu.add(bouttonParametres);
+
+        bouttonQuitter.setText("QUITTER");
+        bouttonQuitter.addActionListener((event) -> {
+            System.exit(0);
+        });
+        menu.add(bouttonQuitter);
+
+        //this.add(nomJeu);
+        this.add(menu,BorderLayout.CENTER);
+        this.setVisible(true);
     }
 
     public void start(){

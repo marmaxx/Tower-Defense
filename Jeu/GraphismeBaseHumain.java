@@ -6,10 +6,10 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 import javax.swing.*;
 
-public class GraphismeBase extends JPanel{
+public class GraphismeBaseHumain extends JPanel{
     private int numero;
 
-    public GraphismeBase (int n){ this.numero=n;}
+    public GraphismeBaseHumain (int n){ this.numero=n;}
 
     public void paintComponent(Graphics g){
         try{
@@ -23,8 +23,8 @@ public class GraphismeBase extends JPanel{
 
     public String getUrl (){
         String url = "";
-        System.out.println("HP: "+Game.getVieBase());
-        System.out.println(Game.getVieBase() <=2);
+        //System.out.println("HP: "+Game.getVieBase());
+        //System.out.println(Game.getVieBase() <=2);
         switch(this.numero){
             case 1: if (Game.getVieBase() <= 2){
                         url = "ressources/base_feu.png"; break;

@@ -3,6 +3,7 @@ package Mobs;
 import Géométrie.Coordonnees;
 import Géométrie.Direction;
 import Humain.Humain;
+import Jeu.GameVue;
 import Jeu.MobsSurLaMap;
 import Map.Cellule;
 import Map.Map;
@@ -12,6 +13,7 @@ public abstract class Mobs {
     private int pv, pvActuel, vitesse, degats, vitesseAttaque;
     private Direction dir;
     private String type;
+    private HealthBar healthBar;
     private final Coordonnees positionInitiale = new Coordonnees(1, 6);
 
     Mobs(Coordonnees pos, int pv, int pvActuel, int vitesse, int degats, int vitesseAttaque, String type){
@@ -23,6 +25,7 @@ public abstract class Mobs {
         this.vitesseAttaque = vitesseAttaque;
         this.type = type;
         this.dir = Direction.NORTH;
+        this.healthBar = new HealthBar(pos, GameVue.getZoneJouable().getWidth()/9, 7);
         try{
             MobsSurLaMap.getInstance().getMobsSurLaMap().add(this);
         }
@@ -30,6 +33,8 @@ public abstract class Mobs {
             System.out.println("MobsSurLaMap null");
         }
     }
+
+    public HealthBar getHealthBar () { return this.healthBar;}
 
     public Coordonnees getPos(){ return this.pos;}
 
@@ -62,7 +67,7 @@ public abstract class Mobs {
         else { this.setPvActuel(i);}
     }
     public boolean estMort(){
-        return this.pv == 0; 
+        return this.pvActuel == 0; 
     }
 
     public Coordonnees nextPos(long deltaT) {
@@ -72,16 +77,16 @@ public abstract class Mobs {
             case EAST -> Coordonnees.DROITE;
             case SOUTH -> Coordonnees.BAS;
             case WEST -> Coordonnees.GAUCHE;
-        }).fois(getVitesse() * deltaT * 10E-3));
+        }).fois(getVitesse() * deltaT * 10E-9));
     }
 
     public boolean isSandInFront(Direction dir, Map m){
         boolean b = false;
         int x = (int)Math.floor(getPos().getX()); // 5
         int y = (int)Math.floor(getPos().getY()); // 1
-        System.out.println("x = "+x+" y = "+y);
+        //System.out.println("x = "+x+" y = "+y);
         switch(dir){
-            case NORTH: System.out.println("au nord"); System.out.println(m.getMap()[x-1][y].getContenu()); if(m.getMap()[x-1][y].getContenu()==Cellule.Contenu.SABLE){ b = true;} break;
+            case NORTH: /*System.out.println("au nord"); System.out.println(m.getMap()[x-1][y].getContenu()); */if(m.getMap()[x-1][y].getContenu()==Cellule.Contenu.SABLE){ b = true;} break;
             case EAST: if(m.getMap()[x][y+1].getContenu()==Cellule.Contenu.SABLE){ b = true;} break;
             case SOUTH: if(m.getMap()[x+1][y].getContenu()==Cellule.Contenu.SABLE){ b = true;} break; 
             case WEST: if(m.getMap()[x][y-1].getContenu()==Cellule.Contenu.SABLE){ b = true;} break;

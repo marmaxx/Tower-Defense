@@ -1,7 +1,6 @@
 package Humain;
 import Mobs.Mobs;
 import Jeu.MobsSurLaMap;
-
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -38,6 +37,7 @@ public class MobsInRangeTourelle implements MobsInRange{
             Random rand = new Random();
             int posInListe = rand.nextInt(nb);
             tourelle.attaque(inRange.get(posInListe));
+            if (inRange.get(posInListe).getPvActuel() >= 0) System.out.println("pv du mob: "+inRange.get(posInListe).getPvActuel());
         }
     }
 

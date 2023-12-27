@@ -4,7 +4,7 @@ import Humain.Humain;
 
 public class Sprinteur extends Mobs {
 
-    public Sprinteur(){ super(new Coordonnees(6,1),30,30,20,0,0,"S");}
+    public Sprinteur(){ super(new Coordonnees(6,1),30,30,50,0,0,"S");}
     
 
     @Override

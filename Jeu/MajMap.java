@@ -42,9 +42,12 @@ public class MajMap {
         }
         finally {
             if (mapBase.getMap()[x][y].getDispo()){
-            mapBase.getMap()[x][y].setDisponible(false);
-            TourSurLaMap.getInstance().getTourSurLaMap().add(tower);
-            } else { System.out.println("Case non disponible");}
+                mapBase.getMap()[x][y].setDisponible(false);
+                TourSurLaMap.getInstance().getTourSurLaMap().add(tower);
+            } 
+            else { 
+                System.out.println("Case non disponible");
+            }
         }
     }
 
@@ -60,7 +63,7 @@ public class MajMap {
                 }
                 dirPossible.remove(mob.getDirection());
                 dirPossible.remove(dirInverse(mob.getDirection()));
-                System.out.println(dirPossible);
+                //System.out.println(dirPossible);
                 mob.setDirection(Direction.NONE);
                 for (Direction dir : dirPossible){
                     switch(dir){
@@ -90,25 +93,25 @@ public class MajMap {
     }
 
     public void update(long deltaT){
-        //LinkedList<Humain> deleteTour = new LinkedList<>();
-        LinkedList<Mobs> deleteMobs = new LinkedList<>();
+        LinkedList<Humain> deleteTour = new LinkedList<>();
+        //LinkedList<Mobs> deleteMobs = new LinkedList<>();
 
-        // for(Humain h : TourSurLaMap.getInstance().getTourSurLaMap()){
-        //     if(h.estMort()){ deleteTour.add(h);}
-        //     attaqueLesMobs(h);
-        // }
-        // TourSurLaMap.getInstance().getTourSurLaMap().removeAll(deleteTour);
+        for(Humain h : TourSurLaMap.getInstance().getTourSurLaMap()){
+            //if(h.estMort()){ deleteTour.add(h);}
+            attaqueLesMobs(h);
+        }
+        TourSurLaMap.getInstance().getTourSurLaMap().removeAll(deleteTour);
 
         for (Mobs mob : MobsSurLaMap.getInstance().getMobsSurLaMap()){
-            if(mob.estMort()){deleteMobs.add(mob);}
+            if(mob.estMort()){ MobsSurLaMap.getInstance().getMobsSurLaMap().remove(mob); break;}
             mouvement(mapBase, mob, deltaT);
             if (mob.getPos().getX() == arrivee.getX() && mob.getPos().getY() == arrivee.getY()){
                 TimerTask timerTask = new TimerTask(){
                         @Override
                         public void run(){
                             MobsSurLaMap.getInstance().getMobsSurLaMap().remove(mob);
-                            System.out.println("did it!");
-                            System.out.println(MobsSurLaMap.getInstance().getMobsSurLaMap());
+                            //System.out.println("did it!");
+                            //System.out.println(MobsSurLaMap.getInstance().getMobsSurLaMap());
                             Game.setVieBase(Game.getVieBase()-1);
                         }
                     };
@@ -116,7 +119,7 @@ public class MajMap {
                 timer.schedule(timerTask, 0);
             }
         }
-        MobsSurLaMap.getInstance().getMobsSurLaMap().removeAll(deleteMobs);
+        //MobsSurLaMap.getInstance().getMobsSurLaMap().removeAll(deleteMobs);
         miseAJourMap();
     }
 
