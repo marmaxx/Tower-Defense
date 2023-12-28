@@ -9,6 +9,7 @@ import java.util.Timer;
 import java.util.TimerTask;
 import Géométrie.Coordonnees;
 import Géométrie.Direction;
+import Humain.Barriere;
 import Humain.Humain;
 import Humain.MobsInRangeMortier;
 import Humain.MobsInRangeTourelle;
@@ -31,7 +32,7 @@ public class MajMap {
         return mapBase;
     }
 
-    public void poseTower(Humain tower){
+    public boolean poseTower(Humain tower){
         int x = (int) tower.getPos().getX();
         int y = (int) tower.getPos().getY();
         try {
@@ -39,16 +40,22 @@ public class MajMap {
         }
         catch (Exception e){
             System.out.println("Index hors du tableau de jeu");
+            return false;
         }
         finally {
-            if (mapBase.getMap()[x][y].getDispo()){
+            if (mapBase.getMap()[x][y].getDispo() && mapBase.getMap()[x][y].isSable() && tower instanceof Barriere){
+                TourSurLaMap.getInstance().getTourSurLaMap().add(tower);
+                 mapBase.getMap()[x][y].setDisponible(false);
+            } else if ( mapBase.getMap()[x][y].isTerre() && mapBase.getMap()[x][y].getDispo()){
                 mapBase.getMap()[x][y].setDisponible(false);
                 TourSurLaMap.getInstance().getTourSurLaMap().add(tower);
             } 
             else { 
                 System.out.println("Case non disponible");
+                return false;
             }
         }
+        return true;
     }
 
     public void mouvement(Map m, Mobs mob, long deltaT){

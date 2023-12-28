@@ -1,37 +1,33 @@
 package Jeu;
 
 import javax.swing.*;
-import Géométrie.Coordonnees;
 import Map.Map;
 import Mobs.Mobs;
 import Mobs.Robot;
 import Mobs.Sprinteur;
 import Mobs.Tank;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
+import java.awt.event.*;
 import java.io.IOException;
 import java.util.ArrayList;
 import Humain.Humain;
-import Humain.Tourelle;
 
 public class GameVue extends JFrame implements ActionListener, MouseListener{
 
     private Game game;
-    private Map map = new Map("map1");
+    private Map map;
     private JPanel ZoneJeux = new JPanel();
     private static JPanel ZoneJouable = new JPanel();
+    private static JPanel ZoneUtile = new JPanel();
     private ShopPanel magasin = new ShopPanel();
     private static MajMap maj;
     private Timer timer;
     private int Xclicked;
     private int Yclicked;
-
     private static JPanel plateau = new JPanel(new GridLayout(8,9));
     private ArrayList<JPanel> panels = new ArrayList<>();
+    private static ArrayList<JPanel> InstancePanels = new ArrayList<>();
+
 
     public static JPanel getPlateau() {
         return plateau;
@@ -41,14 +37,16 @@ public class GameVue extends JFrame implements ActionListener, MouseListener{
         return ZoneJouable;
     }
 
-    public static MajMap getmaj(){
+    public static MajMap getMaj(){
         return maj;
     }
 
     public GameVue(Game game) throws IOException {
 
         this.game = game;
-        maj = new MajMap(map, "map2");
+        maj = game.maj;
+        map = game.map;
+        InstancePanels = panels;
         // Humain h = new Tourelle(new Coordonnees(5, 4));
         // maj.poseTower(h);
 
@@ -61,15 +59,14 @@ public class GameVue extends JFrame implements ActionListener, MouseListener{
         //     }
         // });
         // t.start();
+
         // frame
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         Dimension tailleMoniteur = Toolkit.getDefaultToolkit().getScreenSize();
-        //this.setTitle("Human vs AI");
         this.setSize((int) tailleMoniteur.getWidth(), (int) tailleMoniteur.getHeight());
 
         //plateau
-        plateau.setPreferredSize(
-                new Dimension((int) ((tailleMoniteur.getWidth()) / 2), (int) (tailleMoniteur.getHeight())));
+        plateau.setPreferredSize(new Dimension((int) ((tailleMoniteur.getWidth()) / 2), (int) (tailleMoniteur.getHeight())-200));
 
         for (int i = 0; i < this.map.getMap().length; i++) {
             for (int j = 0; j < this.map.getMap()[0].length; j++) {
@@ -102,28 +99,27 @@ public class GameVue extends JFrame implements ActionListener, MouseListener{
                 //System.out.println("y" + Yclicked);
                 int y = e.getY();
                 Xclicked = y/(int) (plateau.getHeight() / 8);
-                System.out.println("X" + Xclicked);
+                //System.out.println("X" + Xclicked);
                 magasin.updateButton(Map.getMapS()[Xclicked][Yclicked], Xclicked, Yclicked);
             }
         });
 
-        //zone jouable 
-        ZoneJouable.setPreferredSize(new Dimension((int) ((tailleMoniteur.getWidth()) / 2), (int) (tailleMoniteur.getHeight()-200)));
-        OverlayLayout overlayout = new OverlayLayout(ZoneJouable);
-        ZoneJouable.setLayout(overlayout);
+        //zone utile
+        ZoneUtile.setPreferredSize(new Dimension((int) ((tailleMoniteur.getWidth()) / 2), (int) (tailleMoniteur.getHeight())-200));
         for (Mobs mob : MobsSurLaMap.getInstance().getMobsSurLaMap()) {
-            JPanel panel = new GraphismeMobs(mob);
-            String nom = mob.toString();
-            panel.setName(nom);
-            panels.add(panel);
-            ZoneJouable.add(panel);
+                JPanel panel = new GraphismeMobs(mob);
+                String nom = mob.toString();
+                panel.setName(nom);
+                panels.add(panel);
+                ZoneJouable.add(panel);
         }
 
-        for (Humain tower : TourSurLaMap.getInstance().getTourSurLaMap()) {
-            JPanel panel = new GraphismeTour(tower);
-            ZoneJouable.add(panel);
-        }
-        ZoneJouable.add(plateau);
+        //zone jouable 
+        ZoneJouable.setPreferredSize(new Dimension((int) ((tailleMoniteur.getWidth()) / 2), (int) (tailleMoniteur.getHeight()-200)));
+         OverlayLayout overlayout = new OverlayLayout(ZoneJouable);
+         ZoneJouable.setLayout(overlayout);
+         ZoneJouable.add(plateau);
+         //ZoneJouable.add(ZoneUtile);
         
 
         //zone de jeu
@@ -134,8 +130,8 @@ public class GameVue extends JFrame implements ActionListener, MouseListener{
 
         //fenetre
         this.getContentPane().setLayout(new GridLayout());
-        this.add(ZoneJeux);
-        this.add(magasin);
+        this.getContentPane().add(ZoneJeux);
+        this.getContentPane().add(magasin);
         this.setVisible(true);
         timer = new Timer(0, new ActionListener() {
             @Override
@@ -143,6 +139,7 @@ public class GameVue extends JFrame implements ActionListener, MouseListener{
                 updatePane();
                 update();
                 repaint();
+                //ZoneJouable.add(plateau);
                 //ZoneJeux.remove(rootPane);
             }
         });
@@ -151,12 +148,13 @@ public class GameVue extends JFrame implements ActionListener, MouseListener{
     }
 
     public static void poseTower (Humain h){
-        maj.poseTower(h);
-        for (Humain tower : TourSurLaMap.getInstance().getTourSurLaMap()) {
-            JPanel panel = new GraphismeTour(tower);
-            ZoneJouable.add(panel);
+        if(maj.poseTower(h)){
+            ZoneJouable.add(new GraphismeTour(h));
+            ZoneJouable.remove(plateau);
+            ZoneJouable.revalidate();
+            ZoneJouable.repaint();
+            ZoneJouable.add(plateau);
         }
-        ZoneJouable.add(plateau);
     }
 
     public void startGame(){
@@ -170,13 +168,14 @@ public class GameVue extends JFrame implements ActionListener, MouseListener{
     }
 
     public void updatePane(){
-        for (JPanel panel : panels){
-            boolean b = false;
+        for (JPanel panel : InstancePanels){
+        boolean b = false;
             String nom = panel.getName();
-            for (Mobs mob : MobsSurLaMap.getInstance().getMobsSurLaMap()){
-                String nomMob = mob.toString();
-                if (nomMob.equals(nom)) b=true;
-            }
+                for (Mobs mob : MobsSurLaMap.getInstance().getMobsSurLaMap()){
+                    String nomMob = mob.toString();
+                    if (nomMob.equals(nom)) b=true;
+                }
+            // }
             if (!b) ZoneJouable.remove(panel);
         }
     }
@@ -200,17 +199,4 @@ public class GameVue extends JFrame implements ActionListener, MouseListener{
     public void actionPerformed(ActionEvent e) {
         throw new UnsupportedOperationException("Unimplemented method 'actionPerformed'");
     }
-
-    // public JPanel paintComponent(Graphics g){
-    //     JPanel p = new JPanel();
-    //     try{
-    //         Image image = ImageIO.read(new File("ressources/base_clean.png"));
-    //         g.drawImage(image, GameVue.getZoneJouable().getWidth()/9, GameVue.getZoneJouable().getHeight()/8,this);
-    //     }
-    //     catch (IOException e){
-    //         e.printStackTrace();
-    //     }
-    //     p.paint(g);
-    //     return p;
-    // }
 }

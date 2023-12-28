@@ -56,7 +56,7 @@ public class ShopPanel extends JPanel implements MouseListener{
             tower1.setEnabled(false);
             tower1.addActionListener(event -> 
             { 
-                System.out.println(xcelluleAchat);
+                //System.out.println(xcelluleAchat);
                 listachat.add(new Tourelle(new Coordonnees(xcelluleAchat, ycelluleAchat)));
                 tower1.setEnabled(false);
                 buy.setEnabled(true);
@@ -74,7 +74,7 @@ public class ShopPanel extends JPanel implements MouseListener{
             tower2.addActionListener(event -> 
             { 
                 listachat.add(new Mortier(new Coordonnees(xcelluleAchat, ycelluleAchat)));
-                System.out.println("true");
+                //System.out.println("true");
                 tower2.setEnabled(false);
                 buy.setEnabled(true);
             });
@@ -100,10 +100,10 @@ public class ShopPanel extends JPanel implements MouseListener{
             buy.setEnabled(false);
             buy.addActionListener(event -> 
             {
-                System.out.println("true");
-                GameVue.getmaj().poseTower(listachat.get(0));
+                //System.out.println("true");
+                GameVue.poseTower(listachat.get(0));
                 Game.setArgent(listachat.get(0).getCout());
-                System.out.println(Game.getargent());
+                //System.out.println(Game.getargent());
                 listachat.clear();
                 buy.setEnabled(false);
             });

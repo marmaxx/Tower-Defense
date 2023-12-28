@@ -39,12 +39,12 @@ public class Map {
     public void map1 (){
         Cellule [][] cell = new Cellule[8][9];
         contourMap(cell);
-        for (int i = 1; i < cell[1].length-1; i++){cell[1][i] =  new Cellule(Cellule.Contenu.SABLE,false);}
+        for (int i = 1; i < cell[1].length-1; i++){cell[1][i] =  new Cellule(Cellule.Contenu.SABLE,true);}
         cell[1][4] =  new Cellule(Cellule.Contenu.TERRE, true);
-        for (int i = 1; i < cell.length-1; i++){cell[i][1] =  new Cellule(Cellule.Contenu.SABLE,false);}
-        for (int i = 1; i < cell.length-1; i++){cell[i][3] =  new Cellule(Cellule.Contenu.SABLE,false);}
-        for (int i = 1; i < cell.length-1; i++){cell[i][7] = new Cellule(Cellule.Contenu.SABLE,false);}
-        for (int i = 1; i < cell.length-1; i++){cell[i][5] =  new Cellule(Cellule.Contenu.SABLE,false);}
+        for (int i = 1; i < cell.length-1; i++){cell[i][1] =  new Cellule(Cellule.Contenu.SABLE,true);}
+        for (int i = 1; i < cell.length-1; i++){cell[i][3] =  new Cellule(Cellule.Contenu.SABLE,true);}
+        for (int i = 1; i < cell.length-1; i++){cell[i][7] = new Cellule(Cellule.Contenu.SABLE,true);}
+        for (int i = 1; i < cell.length-1; i++){cell[i][5] =  new Cellule(Cellule.Contenu.SABLE,true);}
         for (int i = 2; i < cell.length-1; i++){
             if (i%2==0){ cell[i][2] =  new Cellule(Cellule.Contenu.TERRE, true);}
             else{ cell[i][2] =  new Cellule(Cellule.Contenu.EAU,false);}
@@ -57,7 +57,7 @@ public class Map {
             if (i%2!=0){ cell[i][4] =  new Cellule(Cellule.Contenu.TERRE, true);}
             else{ cell[i][4] =  new Cellule(Cellule.Contenu.EAU,false);}
         }
-        cell[6][4] = new Cellule(Cellule.Contenu.SABLE,false);
+        cell[6][4] = new Cellule(Cellule.Contenu.SABLE,true);
         map = cell;
     }
 
@@ -65,8 +65,8 @@ public class Map {
     public void map2(){
         Cellule [][] cell = new Cellule[8][9]; 
         contourMap(cell);
-        for (int i = 1; i < cell[1].length-2; i++){ cell[1][i] =  new Cellule(Cellule.Contenu.SABLE,false);}
-        for (int i = 1; i < cell[1].length-2; i++){cell[i][1] = new Cellule(Cellule.Contenu.SABLE,false); cell[i][cell[1].length-2] = new Cellule(Cellule.Contenu.SABLE,false);}
+        for (int i = 1; i < cell[1].length-2; i++){ cell[1][i] =  new Cellule(Cellule.Contenu.SABLE,true);}
+        for (int i = 1; i < cell[1].length-2; i++){cell[i][1] = new Cellule(Cellule.Contenu.SABLE,true); cell[i][cell[1].length-2] = new Cellule(Cellule.Contenu.SABLE,true);}
         for (int i = 2; i < cell[1].length-3; i++){ cell[2][i] = new Cellule(Cellule.Contenu.EAU,false); cell[cell[1].length-3][i] = new Cellule(Cellule.Contenu.EAU,false);}
         for (int i = 2; i < cell[1].length-2; i++){cell[i][2] = new Cellule(Cellule.Contenu.EAU,false); cell[i][cell[1].length-3] = new Cellule(Cellule.Contenu.EAU,false);}
         for (int i =3; i< cell[1].length-3; i++){

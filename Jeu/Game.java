@@ -7,6 +7,8 @@ import java.awt.Toolkit;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.io.IOException;
+import Map.Map;
+
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -14,6 +16,9 @@ import javax.swing.JMenuBar;
 //import javax.swing.JPanel;
 
 public class Game extends JFrame implements KeyListener{
+
+    Map map;
+    MajMap maj;
     private int score;
     private static int argent = 150;
     private static int vieBase = 3;
@@ -24,7 +29,7 @@ public class Game extends JFrame implements KeyListener{
     private JButton bouttonQuitter = new JButton();
     
     public static void main (String [] args) throws IOException{
-        new Game();
+        new Game("map1");
     }
 
     private GameVue gameVue;
@@ -33,7 +38,11 @@ public class Game extends JFrame implements KeyListener{
 
     public GameVue getGameVue(){ return this.gameVue;}
     
-    public Game() throws IOException{
+    public Game(String nameMape) throws IOException{
+
+        this.map = new Map(nameMape);
+        this.maj = new MajMap(map, nameMape);
+
         this.parametreVue.setVisible(false);
         this.choixJeuVue.setVisible(false);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -91,7 +100,7 @@ public class Game extends JFrame implements KeyListener{
     } 
 
     public static void setArgent(int argents){
-        argent = argents;
+        argent -= argents;
     }
     public static int getargent(){
         return argent;

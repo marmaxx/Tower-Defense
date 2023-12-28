@@ -9,6 +9,7 @@ import Mobs.Mobs;
 
 public class GraphismeMobs extends JPanel{
     private Mobs mob;
+
     public GraphismeMobs(Mobs mob){
         this.mob=mob;
     }
@@ -48,5 +49,6 @@ public class GraphismeMobs extends JPanel{
 
     public void updateGraphismeMobs(){
         new GraphismeMobs(mob);
+        this.repaint();
     }
 }

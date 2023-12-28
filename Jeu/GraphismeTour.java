@@ -15,7 +15,7 @@ public class GraphismeTour extends JPanel{
         this.tower = h;
     }
 
-       public void paintComponent(Graphics g){
+    public void paintComponent(Graphics g){
         try{
             Image image = ImageIO.read(new File(getUrl(tower)));
             g.drawImage(image,(int)positionY(), (int)positionX(), GameVue.getZoneJouable().getWidth()/9, GameVue.getZoneJouable().getHeight()/8,this);

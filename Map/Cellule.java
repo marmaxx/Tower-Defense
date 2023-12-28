@@ -36,5 +36,8 @@ public class Cellule {
     public boolean isTerre(){
         return this.contenu == Cellule.Contenu.TERRE;
     }
+    public boolean isSable(){
+        return this.contenu == Cellule.Contenu.SABLE;
+    }
 
 }
